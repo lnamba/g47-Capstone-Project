@@ -14,6 +14,7 @@ import Accordion from '@/components/Accordion';
 import Dropdown from '@/components/Dropdown';
 import Tabs from '@/components/Tabs';
 import Orbit from '@/components/Orbit';
+import ReadComp from '@/components/ReadComp'
 
 Vue.use(Router);
 
@@ -33,5 +34,6 @@ export default new Router({
     { name: 'dropdown', path: '/dropdown', component: Dropdown },
     { name: 'tabs', path: '/tabs', component: Tabs },
     { name: 'orbit', path: '/orbit', component: Orbit },
+    { name: 'reading-comprehension', path: '/read', component: ReadComp },
   ],
 });

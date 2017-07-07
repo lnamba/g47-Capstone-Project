@@ -14,23 +14,26 @@
         <li><router-link to="/dropdown" exact>Dropdown</router-link></li>
         <li><router-link to="/tabs" exact>Tabs</router-link></li>
         <li><router-link to="/orbit" exact>Orbit</router-link></li>
-      </ul>          
+      </ul>
     </div>
     <div class="off-canvas-content" data-off-canvas-content>
       <div class="top-bar">
-        
+
           <ul class="menu expanded">
             <li class="logo">
-              <router-link to="/">Vue-Foundation</router-link>
+              <router-link to="/">Title</router-link>
             </li>
             <li><a class="button small menu-button" data-toggle="offCanvas">Menu</a></li>
           </ul>
-        
+
       </div>
       <div class="content-wrapper">
         <router-view></router-view>
       </div>
-    
+
+    </div>
+    <div class="bottom-bar">
+      
     </div>
   </div>
 </template>
@@ -46,10 +49,11 @@ export default {
 
 
 
-<style lang="scss">  
+<style lang="scss">
   @import './styles/global';
-  
-  // Chrome Reset 
+  @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+  // Chrome Reset
   a:focus {
     outline: none;
   }
@@ -62,7 +66,7 @@ export default {
   li a.menu-button {
     border-radius: 20px;
     padding-left: 1.5rem;
-    padding-right: 1.5rem; 
+    padding-right: 1.5rem;
     font-weight: 600;
     text-transform: uppercase;
     display: inline-block;
@@ -70,7 +74,6 @@ export default {
   }
 
   .content-wrapper {
-    padding: 0.75rem 0;
   }
 
   .sidebar-menu {
@@ -85,4 +88,13 @@ export default {
       color: $primary-color;
     }
   }
+
+  .top-bar, .logo, .logo ~ li, .bottom-bar {
+    background-color: #333;
+  }
+
+  .menu-button{
+    background-color: #9b2f33;
+  }
+
 </style>
