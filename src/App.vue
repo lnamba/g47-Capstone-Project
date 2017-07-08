@@ -1,20 +1,7 @@
 <template>
   <div id="app">
     <div class="off-canvas position-right" id="offCanvas" data-off-canvas>
-      <ul class="sidebar-menu" data-close="offCanvas">
-        <li><router-link to="/" exact>Home</router-link></li>
-        <li><router-link to="/reveal" exact>Reveal</router-link></li>
-        <li><router-link to="/slider" exact>Slider</router-link></li>
-        <li><router-link to="/tooltip" exact>Tooltip</router-link></li>
-        <li><router-link to="/dropdown-menu" exact>Dropdown Menu</router-link></li>
-        <li><router-link to="/drilldown-menu" exact>Drilldown Menu</router-link></li>
-        <li><router-link to="/accordion-menu" exact>Accordion Menu</router-link></li>
-        <li><router-link to="/magellan" exact>Magellan</router-link></li>
-        <li><router-link to="/accordion" exact>Accordion</router-link></li>
-        <li><router-link to="/dropdown" exact>Dropdown</router-link></li>
-        <li><router-link to="/tabs" exact>Tabs</router-link></li>
-        <li><router-link to="/orbit" exact>Orbit</router-link></li>
-      </ul>
+
     </div>
     <div class="off-canvas-content" data-off-canvas-content>
       <div class="top-bar">
@@ -23,7 +10,6 @@
             <li class="logo">
               <router-link to="/">Title</router-link>
             </li>
-            <li><a class="button small menu-button" data-toggle="offCanvas">Menu</a></li>
           </ul>
 
       </div>
@@ -32,8 +18,8 @@
       </div>
 
     </div>
-    <div class="bottom-bar">
-      
+    <div id="bottom-bar" class="top-bar">
+      <p>&copy; 2017 Spiffy Ventures</p>
     </div>
   </div>
 </template>
@@ -95,6 +81,11 @@ export default {
 
   .menu-button{
     background-color: #9b2f33;
+  }
+
+  #bottom-bar {
+    color: #FFF;
+
   }
 
 </style>

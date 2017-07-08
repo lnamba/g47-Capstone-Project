@@ -1,33 +1,36 @@
 <template lang="html">
-  <div class="row">
-    <div id="login">
-      <h1 class="text-center"><b>Login</b></h1>
-      <div id="outer">
-        <form>
-          <div class="row">
-            <div class="medium-6 columns">
-              <label>Email Address:
-                <input type="text" name="email" v-model="email">
-              </label>
+    <div class="row" id="outer">
+      <div id="login">
+        <div id="inner">
+          <form>
+            <h1><b>Login</b></h1>
+            <div class="row">
+              <div class="medium-6 columns">
+                <label>Email Address:
+                  <input type="text" name="email" v-model="email">
+                </label>
+              </div>
+              <div class="medium-6 columns">
+                <label>Password:
+                  <input type="password" name="password" v-model="password">
+                </label>
+              </div>
             </div>
-            <div class="medium-6 columns">
-              <label>Password:
-                <input type="password" name="password" v-model="password">
-              </label>
+            <div class="row">
+              <div class="medium-6 columns">
+                <input v-on:click="submitForm" class="button alert" type="submit" name="submit" value="Login">
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="medium-6 columns">
-              <input v-on:click="submitForm" v-class="button alert" type="submit" name="submit" value="submit">
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
+import Router from 'vue-router';
+import Vue from 'vue';
+
 export default {
   data() {
     return {
@@ -52,12 +55,12 @@ export default {
       var response = x.response;
         if (x.readyState == 4 && x.status == 200) {
           if (response != null) {
+
           }
         }
       }
-
       x.send(credentials);
-      router.push('read')
+      this.$router.push('read');
     }
   }
 };
@@ -66,31 +69,41 @@ export default {
 <style lang="css">
 
 #login {
-  height: 100vh;
-  background-image: url('../assets/img/login-background.jpg');
   padding-top: 150px;
   font-family: "Raleway", "Helvetica Neue", sans-serif;
 }
 
-#login > h1 {
+form > h1 {
   font-family: "Raleway", "Helvetica Neue", sans-serif;
+  color: #FFF;
 }
 
-#outer {
-  background-color: #FFF;
+#inner {
   width: 50%;
   height: 55%;
   margin: 0 auto;
   padding: 20px;
+  float: left;
+  margin-left: 10%;
 }
 
-#outer > form {
+/*#inner > form {
   background-color: #FCEBEA;
   height: 100%;
+}*/
+
+#outer {
+  height: 100vh;
+  background: url('../assets/img/lanterns.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 label {
   font-size: 1.5em;
+  color: #FFF;
 }
 
 div.medium-6.columns:first-child {

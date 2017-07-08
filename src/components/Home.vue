@@ -9,11 +9,12 @@ import Vue from 'vue';
 import Login from '@/components/Login';
 
 Vue.component('login', Login);
+
 export default {
   name: 'hello',
   data() {
     return {
-      
+
     };
   },
 };

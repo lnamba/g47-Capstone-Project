@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="read-comp">
-
+  <div class="row" id="read-comp">
+    <h1>Make a sentence:</h1>
   </div>
 </template>
 
