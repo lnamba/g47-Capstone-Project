@@ -56,7 +56,6 @@ export default {
           'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
         }
       }).then(function(response) {
-        console.log(response);
         self.userInfo = response.data;
         // need auth here
         self.$router.push({name: 'reading-comprehension', params: {guid:self.userInfo.uniqueID }});
