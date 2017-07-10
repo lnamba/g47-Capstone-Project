@@ -1,22 +1,14 @@
 <template>
   <div id="app">
-    <div class="off-canvas position-right" id="offCanvas" data-off-canvas>
-
+    <div class="top-bar">
+      <ul class="menu expanded">
+        <li class="logo">
+          <router-link to="/">Title</router-link>
+        </li>
+      </ul>
     </div>
-    <div class="off-canvas-content" data-off-canvas-content>
-      <div class="top-bar">
-
-          <ul class="menu expanded">
-            <li class="logo">
-              <router-link to="/">Title</router-link>
-            </li>
-          </ul>
-
-      </div>
-      <div class="content-wrapper">
-        <router-view></router-view>
-      </div>
-
+    <div class="content-wrapper">
+      <router-view></router-view>
     </div>
     <div id="bottom-bar" class="top-bar">
       <p>&copy; 2017 Spiffy Ventures</p>
@@ -27,9 +19,7 @@
 <script>
 export default {
   name: 'app',
-  mounted() {
-    this.offCanvas = new Foundation.OffCanvas($('#offCanvas'));
-  },
+  
 };
 </script>
 
@@ -85,7 +75,14 @@ export default {
 
   #bottom-bar {
     color: #FFF;
+    display: table;
+    width: 100%;
+  }
 
+  #bottom-bar > p {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 8px;
   }
 
 </style>

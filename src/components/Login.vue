@@ -2,7 +2,7 @@
     <div class="row" id="outer">
       <div id="login">
         <div id="inner">
-          <form>
+          <form v-on:submit.prevent="submitForm">
             <h1><b>Login</b></h1>
             <div class="row">
               <div class="medium-6 columns">
@@ -18,7 +18,7 @@
             </div>
             <div class="row">
               <div class="medium-6 columns">
-                <input v-on:click="submitForm" class="button alert" type="submit" name="submit" value="Login">
+                <input class="button alert" type="submit" name="submit" value="Login">
               </div>
             </div>
           </form>
@@ -30,37 +30,59 @@
 <script>
 import Router from 'vue-router';
 import Vue from 'vue';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
 export default {
   data() {
     return {
       email: '',
       password: '',
+      userInfo: []
     };
   },
   methods: {
     submitForm() {
       // 1 == simplified, 2 == traditional, 1 is default
-      const url = "https://www.hanyu.co/ajax/login.aspx";
-      var x = new XMLHttpRequest();
-      var credentials = "{ 'email' : '" + this.email + "', 'password' : '" + this.password + "' }";
-
-      x.open('POST', url);
-      x.responseType = 'json';
-
-      x.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
-
-      x.onload = function () {
-      console.log('this is the response', x.response);
-      var response = x.response;
-        if (x.readyState == 4 && x.status == 200) {
-          if (response != null) {
-
-          }
+      let self = this;
+      axios({
+        method: 'post',
+        url: 'https://www.hanyu.co/ajax/login.aspx',
+        data:{
+          email: this.email,
+          password: this.password
+        },
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
         }
-      }
-      x.send(credentials);
-      this.$router.push('read');
+      }).then(function(response) {
+        console.log(response);
+        self.userInfo = response.data;
+        // need auth here
+        self.$router.push({name: 'reading-comprehension', params: {guid:self.userInfo.uniqueID }});
+      })
+  //     const url = "https://www.hanyu.co/ajax/login.aspx";
+  //     var x = new XMLHttpRequest();
+  //     var credentials = "{ 'email' : '" + this.email + "', 'password' : '" + this.password + "' }";
+  //
+  //     x.open('POST', url);
+  //     x.responseType = 'json';
+  //
+  //     x.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+  //
+  //     x.onload = function () {
+  //     console.log('this is the response', x.response);
+  //     var response = x.response;
+  //       if (x.readyState == 4 && x.status == 200) {
+  //         if (response != null) {
+  //           this.data = response;
+  //         }
+  //       }
+  //     }
+  //     x.send(credentials);
+  //     console.log(this.data);
+  //     // this.$router.myProps.guid = response;
+  //     this.$router.push('read');
     }
   }
 };
@@ -86,11 +108,6 @@ form > h1 {
   float: left;
   margin-left: 10%;
 }
-
-/*#inner > form {
-  background-color: #FCEBEA;
-  height: 100%;
-}*/
 
 #outer {
   height: 100vh;
