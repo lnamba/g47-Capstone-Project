@@ -10,6 +10,7 @@
             <span>{{ word }}</span>
           </div> -->
           <a><div class="space" v-for="(word, index) in unshuffled" v-on:click="appendWord(word, index)">
+            <!-- <span v-show="wordCorrect === index"></span> -->
             <span v-show="spaceArr[index]">{{ word }}</span>
           </div></a>
           <span v-model="punctuation">{{ punctuation }}</span>
@@ -45,9 +46,11 @@ export default {
      clickedWord: '',
      currInd: 0,
      unshuffled: [],
-     wordCorrect: false,
+     wordCorrect: '',
+    //  wordCorrect: false,
      roundClear: false,
-     spaceArr : []
+     spaceArr : [],
+     wordyArr:[],
     }
   },
   // watch: {
@@ -83,8 +86,26 @@ export default {
           'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
         }
       }).then(function(response){
+
         let random = Math.floor(Math.random() * response.data.length)
         let chosenSentence = response.data[random]
+        let extras = []
+        response.data.map(function(i){
+          if(i !== chosenSentence)
+          i.english.split(' ').map(function(j){
+            extras.push(j)
+          })
+        })
+        // console.log('here are the extras',extras);
+
+        let count = 0;
+        while(count < 3) {
+          let rand = Math.floor(Math.random() * extras.length)
+          if (self.wordyArr.indexOf(extras[rand]) === -1) {
+            self.wordyArr.push(extras[rand])
+          }
+          count++;
+        }
         console.log(chosenSentence);
         self.chinese = chosenSentence.chinese;
         self.english = chosenSentence.english;
@@ -113,13 +134,14 @@ export default {
     },
     clickWord(tile){
       this.clickedWord = tile;
-      console.log(this.clickedWord);
     },
     appendWord(word, index){
+      console.log(index);
       if (word === this.clickedWord) {
-        this.wordCorrect = true;
+        this.wordCorrect = index;
         this.spaceArr[index] = word;
         console.log(this.spaceArr);
+        this.$forceUpdate()
       }
       if (!this.spaceArr.includes('')) {
         this.roundClear = true;
@@ -134,7 +156,8 @@ export default {
       this.clickedWord = '';
       this.currInd = 0;
       this.unshuffled = [];
-      this.wordCorrect = false;
+      this.wordCorrect = '';
+      //  wordCorrect: false;
       this.roundClear = false;
       this.spaceArr  = [];
       this.start()
@@ -174,12 +197,11 @@ export default {
     display: inline-block;
     width: 15%;
     height: 5%;
-    border-bottom: 2px solid #000;
+    border: 2px solid #000;
     margin: 40px 20px;
     font-family: "Raleway", "Helvetica Neue", sans-serif;
     font-size: 2em;
     color: #55CC99;
-
   }
 
   #spaces > span {
@@ -197,7 +219,7 @@ export default {
     font-size: 2em;
     border: 2px solid #000;
     margin: 0 20px;
-    padding: 10px;
+    padding: 15px;
     font-family: "Raleway", "Helvetica Neue", sans-serif;
     border-radius: 15px;
     background-color: #DDD;
