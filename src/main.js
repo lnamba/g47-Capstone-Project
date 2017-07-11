@@ -14,8 +14,6 @@ window.$ = jQuery;
 require('motion-ui');
 require('what-input');
 require('foundation-sites');
-// const VueTruncate = require('vue-truncate-filter');
-Vue.use(VueTruncate, VueTruncate)
 
 Vue.use(VueAxios, axios)
 

@@ -6,15 +6,15 @@
     </div>
     <div class="row">
       <div id="spaces" class="medium-8 columns">
-          <div class="space" v-for="(word, index) in wbw">
+          <div class="space" v-for="(word, index) in wbwState" v-on:click="removeTile(word, index)">
             <div v-show="wbwState[index]" v-bind:style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#000' }">{{ word.pinyin }}</div>
-            <div v-show="wbwState[index]" v-bind:style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#C10E40' }">{{ word.english | truncate }}</div>
+            <div v-show="wbwState[index]" v-bind:style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#239D1F' }"><b>{{ word.english }}</b></div>
           </div>
       </div>
       <div id="tiles">
         <button class="tile" v-for="(word, index) in shuffled" v-on:click="clickWord(word, index)" v-bind:title="word.english">
           <div class="pinyin">{{ word.pinyin }}</div>
-          <div class="eng">{{ word.english | truncate }}</div>
+          <div class="eng">{{ word.english }}</div>
         </button>
       </div>
     </div>
@@ -23,6 +23,11 @@
         <h1 id="cheer">{{ english }}</h1>
       </div>
       <button class="button success large" v-on:click="next">Next Sentence</button>
+    </div>
+    <div class="row" v-show="!match(wbw, wbwState) && !wbwState.includes('')">
+      <div class="message">
+        <h1 id="encourage">Keep Trying!</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -33,8 +38,6 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueTruncate from 'vue-truncate-filter';
-// const VueTruncate = require('vue-truncate-filter')
-// Vue.use(VueTruncate)
 
 export default {
   data(){
@@ -50,6 +53,7 @@ export default {
       currentIndex: 0,
       roundClear: false,
       clickedWord: {},
+      roundOver: false,
     }
   },
   mounted(){
@@ -97,23 +101,44 @@ export default {
     },
     clickWord(word, index){
       this.clickedWord = word;
-      if (this.wbw.indexOf(this.clickedWord) === this.currentIndex){
-        this.wbwState[this.currentIndex] = this.clickedWord.chinese;
-        let self = this;
-        this.shuffled.map(function(i, index){
-          if (i === word) {
-            console.log("we're removing", i);
-            self.shuffled.splice(index, 1)
-            console.log('updated shuffled', self.shuffled);
-            console.log(self.wbwState);
-          }
-        })
-        this.$forceUpdate();
-        this.currentIndex++;
+      this.wbwState[this.currentIndex] = this.clickedWord;
+      console.log(this.wbwState);
+      this.$forceUpdate();
+      if (this.wbwState[this.currentIndex] === this.wbw[this.currentIndex].chinese) {
+        console.log('matches');
       }
-      if (!this.wbwState.includes('')) {
+      let self = this;
+      this.shuffled.map(function(i, index){
+        if (i === word) {
+          self.shuffled.splice(index, 1)
+        }
+      })
+      this.currentIndex++;
+
+      //check if the wbwState and wbw matches
+      if (this.match(this.wbw, this.wbwState)){
+        console.log('they match!');
         this.roundClear = true;
+      } else {
+        console.log('no match');
       }
+    },
+    match(arr1, arr2){
+      if (arr1.length !== arr2.length) {
+        return false;
+      }
+      for(let i = arr1.length; i--;) {
+        if (arr1[i] !== arr2[i]){
+          return false;
+        }
+      }
+      return true;
+    },
+    removeTile(word, index){
+      this.shuffled.push(word);
+      this.wbwState.splice(index, 1, '');
+      this.currentIndex--;
+      console.log('updated wbwState',this.wbwState);
     },
     next(){
       this.guid = this.$route.params.guid;
@@ -161,7 +186,7 @@ export default {
 
   #spaces {
     display: block;
-    margin: 100px auto 30px auto;
+    margin: 100px auto 80px auto;
     text-align: center;
   }
 
@@ -220,7 +245,7 @@ export default {
     font-size: 1em;
   }
 
-  #cheer {
+  #cheer, #encourage {
     text-align: center;
     margin: 50px auto;
   }
