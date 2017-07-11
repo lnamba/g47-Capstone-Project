@@ -8,19 +8,19 @@
       <div id="spaces" class="medium-8 columns">
           <div class="space" v-for="(word, index) in wbw">
             <div v-show="wbwState[index]" v-bind:style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#000' }">{{ word.pinyin }}</div>
-            <div v-show="wbwState[index]" v-bind:style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#C10E40' }">{{ word.english }}</div>
+            <div v-show="wbwState[index]" v-bind:style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#C10E40' }">{{ word.english | truncate 5 '....' }}</div>
           </div>
       </div>
       <div id="tiles">
         <button class="tile" v-for="(word, index) in shuffled" v-on:click="clickWord(word, index)">
           <div class="pinyin">{{ word.pinyin }}</div>
-          <div class="eng">{{ word.english }}</div>
+          <div class="eng">{{ word.english | truncate 5 '....' }}</div>
         </button>
       </div>
     </div>
     <div class="row" v-show="roundClear">
       <div class="message">
-        <h1 id="cheer">Nice Job!</h1>
+        <h1 id="cheer">{{ english }}</h1>
       </div>
       <button class="button success large" v-on:click="next">Next Sentence</button>
     </div>
@@ -32,6 +32,9 @@ import Router from 'vue-router';
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import VueTruncate from 'vue-truncate-filter';
+// const VueTruncate = require('vue-truncate-filter')
+// Vue.use(VueTruncate)
 
 export default {
   data(){
@@ -138,10 +141,12 @@ export default {
 
   #heading h1:first-child {
     margin-top: 20px;
+
   }
 
   #heading h1:last-child {
     text-align: center;
+    margin-top: 40px;
   }
 
   #spaces {
@@ -155,21 +160,20 @@ export default {
     width: 20%;
     height: 5%;
     border: 2px solid #000;
-    margin: 30px 20px;
+    margin: 40px 20px;
     font-family: "Raleway", "Helvetica Neue", sans-serif;
-    font-size: 2em;
     color: #55CC99;
     cursor: pointer;
     border-radius: 15px;
     background-color: #DDD;
   }
 
-  .pinyin {
-    color: #000;
+  .space div:first-child {
+    font-size: 1.5em;
   }
 
-  .eng {
-    color: #C10E40;
+  .space div:last-child {
+    font-size: 1em;
   }
 
   #spaces > span {
@@ -181,11 +185,11 @@ export default {
 
   #tiles {
     text-align: center;
+    margin-bottom: 50px;
   }
 
   .tile {
     line-height: 1.5;
-    font-size: 2em;
     border: 2px solid #000;
     margin: 30px 20px;
     padding: 8px;
@@ -196,13 +200,23 @@ export default {
     width: 20%;
   }
 
+  .pinyin {
+    color: #000;
+    font-size: 1.5em;
+  }
+
+  .eng {
+    color: #C10E40;
+    font-size: 1em;
+  }
+
   #cheer {
     text-align: center;
     margin: 50px auto;
   }
 
   button.success {
-    margin: auto;
+    margin: 100px auto;
     display: block;
   }
 

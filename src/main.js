@@ -6,6 +6,7 @@ import App from './App';
 import router from './router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import VueTruncate from 'vue-truncate-filter';
 
 window.jQuery = jQuery;
 window.$ = jQuery;
@@ -13,6 +14,8 @@ window.$ = jQuery;
 require('motion-ui');
 require('what-input');
 require('foundation-sites');
+// const VueTruncate = require('vue-truncate-filter');
+Vue.use(VueTruncate, VueTruncate)
 
 Vue.use(VueAxios, axios)
 
