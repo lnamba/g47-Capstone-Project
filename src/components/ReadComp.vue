@@ -6,17 +6,21 @@
     </div>
     <div class="row">
       <div id="spaces" class="medium-8 columns">
-          <!-- <div class="space" v-for="(word, index) in spaceArr" v-on:click="appendWord(unshuffled[index], index)">
-            <span>{{ word }}</span>
-          </div> -->
-          <a><div class="space" v-for="(word, index) in unshuffled" v-on:click="appendWord(word, index)">
-            <!-- <span v-show="wordCorrect === index"></span> -->
+          <!-- <a><div class="space" v-for="(word, index) in unshuffled" v-on:click="appendWord(word, index)">
             <span v-show="spaceArr[index]">{{ word }}</span>
           </div></a>
-          <span v-model="punctuation">{{ punctuation }}</span>
+          <span v-model="punctuation">{{ punctuation }}</span> -->
+          <div class="space" v-for="(word, index) in wbw">
+            <div v-show="wbwState[index]">{{ word.pinyin }}</div>
+            <div v-show="wbwState[index] ">{{ word.english }}</div>
+          </div>
       </div>
       <div id="tiles">
-        <button class="tile" v-for="tile in tiles" v-on:click="clickWord(tile)">{{ tile }}</button>
+        <button class="tile" v-for="(word, index) in shuffled" v-on:click="clickWord(word, index)">
+          <div class="pinyin">{{ word.pinyin }}</div>
+          <div class="eng">{{ word.english }}</div>
+        </button>
+        <!-- <button class="tile" v-for="tile in tiles" v-on:click="clickWord(tile)">{{ tile }}</button> -->
       </div>
     </div>
     <div class="row" v-show="roundClear">
@@ -37,37 +41,24 @@ import VueAxios from 'vue-axios';
 export default {
   data(){
     return {
-     guid: this.$route.params.guid,
-     chinese: '',
-     english: '',
-     wordCount: 0,
-     punctuation: '',
-     tiles: [],
-     clickedWord: '',
-     currInd: 0,
-     unshuffled: [],
-     wordCorrect: '',
-    //  wordCorrect: false,
-     roundClear: false,
-     spaceArr : [],
-     wordyArr:[],
+      guid: this.$route.params.guid,
+      chinese: '',
+      english: '',
+      pinyin: '',
+      wbw: [],
+      wbwState: [],
+      unshuffled: [],
+      shuffled: [],
+      currentIndex: 0,
+      roundClear: false,
+      clickedWord: {},
     }
   },
-  // watch: {
-  //   spaceArr:{
-  //     handler: function(val, oldVal){
-  //       console.log('watching',val);
-  //     },
-  //     deep: true,
-  //   }
-  // },
   mounted(){
     this.start()
   },
   methods: {
-    start(){
-      // hotmail - 2612f3ef-ce14-4dae-9917-bed20ddfca98
-      // gmail - 8f3e9255-f0bf-4418-9b64-9b02b0ec05fd
+    start() {
       let self = this;
 
       let data = {
@@ -86,89 +77,61 @@ export default {
           'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
         }
       }).then(function(response){
-
         let random = Math.floor(Math.random() * response.data.length)
         let chosenSentence = response.data[random]
-        let extras = []
-        response.data.map(function(i){
-          if(i !== chosenSentence)
-          i.english.split(' ').map(function(j){
-            extras.push(j)
-          })
-        })
-        // console.log('here are the extras',extras);
-
-        let count = 0;
-        while(count < 3) {
-          let rand = Math.floor(Math.random() * extras.length)
-          if (self.wordyArr.indexOf(extras[rand]) === -1) {
-            self.wordyArr.push(extras[rand])
-          }
-          count++;
-        }
         console.log(chosenSentence);
         self.chinese = chosenSentence.chinese;
         self.english = chosenSentence.english;
-        self.wordCount = chosenSentence.english.split(' ').length;
-        self.punctuation = chosenSentence.english.charAt(chosenSentence.english.length - 1);
-        self.unshuffled = chosenSentence.english.split(' ');
-
-        let last = self.unshuffled[self.unshuffled.length - 1]
-        let punct =last.split('').splice(0, last.length-1).join('')
-        self.unshuffled[self.unshuffled.length - 1] = punct
-        console.log(self.unshuffled);
-
-        self.unshuffled.map(function(i) {
-          self.spaceArr.push('');
+        self.wbw = chosenSentence.wbw;
+        self.wbw.map(function(i){
+          self.wbwState.push('')
         })
-
-        let shuffled = self.unshuffled.slice(), i, j, k;
+        console.log(self.wbwState);
+        console.log(self.wbw);
+        let shuffled = self.wbw.slice(), i, j, k;
         for (i = shuffled.length; i; i--) {
           j = Math.floor(Math.random() * i);
           k = shuffled[i - 1];
           shuffled[i - 1] = shuffled[j];
           shuffled[j] = k;
         }
-        self.tiles = shuffled;
+        self.shuffled = shuffled;
+        console.log(self.shuffled);
       })
     },
-    clickWord(tile){
-      this.clickedWord = tile;
-    },
-    appendWord(word, index){
-      console.log(index);
-      if (word === this.clickedWord) {
-        this.wordCorrect = index;
-        this.spaceArr[index] = word;
-        console.log(this.spaceArr);
-        this.$forceUpdate()
+    clickWord(word, index){
+      this.clickedWord = word;
+      if (this.wbw.indexOf(this.clickedWord) === this.currentIndex){
+        this.wbwState[this.currentIndex] = this.clickedWord.chinese;
+        let self = this;
+        this.shuffled.map(function(i, index){
+          if (i === word) {
+            console.log("we're removing", i);
+            self.shuffled.splice(index, 1)
+            console.log('updated shuffled', self.shuffled);
+          }
+        })
+        this.$forceUpdate();
+        this.currentIndex++;
       }
-      if (!this.spaceArr.includes('')) {
+      if (!this.wbwState.includes('')) {
         this.roundClear = true;
       }
     },
     next(){
+      this.guid = this.$route.params.guid;
       this.chinese = '';
       this.english = '';
-      this.wordCount = 0;
-      this.punctuation = '';
-      this.tiles = [];
-      this.clickedWord = '';
-      this.currInd = 0;
+      this.pinyin = '';
+      this.wbw = [];
+      this.wbwState = [];
       this.unshuffled = [];
-      this.wordCorrect = '';
-      //  wordCorrect: false;
+      this.shuffled = [];
+      this.currentIndex = 0;
       this.roundClear = false;
-      this.spaceArr  = [];
+      this.clickedWord = {};
       this.start()
     }
-    // appendWord(word, index){
-    //   console.log(index);
-    //   if (word === this.clickedWord) {
-    //     this.spaceArr[index] = word;
-    //   }
-    //   console.log(this.spaceArr);
-    // }
   }
 }
 
@@ -200,8 +163,16 @@ export default {
     border: 2px solid #000;
     margin: 40px 20px;
     font-family: "Raleway", "Helvetica Neue", sans-serif;
-    font-size: 2em;
+    font-size: 1.5em;
     color: #55CC99;
+  }
+
+  .pinyin {
+    color: indigo;
+  }
+
+  .eng {
+    color: Teal;
   }
 
   #spaces > span {
@@ -218,12 +189,13 @@ export default {
   .tile {
     font-size: 2em;
     border: 2px solid #000;
-    margin: 0 20px;
+    margin: 30px 20px;
     padding: 15px;
     font-family: "Raleway", "Helvetica Neue", sans-serif;
     border-radius: 15px;
     background-color: #DDD;
     cursor: pointer;
+    width: 20%;
   }
 
   #cheer {
@@ -235,5 +207,6 @@ export default {
     margin: auto;
     display: block;
   }
+
 
 </style>

@@ -10,16 +10,16 @@
     <div class="content-wrapper">
       <router-view></router-view>
     </div>
-    <div id="bottom-bar" class="top-bar">
+    <!-- <div id="bottom-bar" class="top-bar">
       <p>&copy; 2017 Spiffy Ventures</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
-  
+
 };
 </script>
 
