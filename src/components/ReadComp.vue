@@ -8,13 +8,13 @@
       <div id="spaces" class="medium-8 columns">
           <div class="space" v-for="(word, index) in wbw">
             <div v-show="wbwState[index]" v-bind:style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#000' }">{{ word.pinyin }}</div>
-            <div v-show="wbwState[index]" v-bind:style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#C10E40' }">{{ word.english | truncate 5 '....' }}</div>
+            <div v-show="wbwState[index]" v-bind:style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#C10E40' }">{{ word.english | truncate }}</div>
           </div>
       </div>
       <div id="tiles">
-        <button class="tile" v-for="(word, index) in shuffled" v-on:click="clickWord(word, index)">
+        <button class="tile" v-for="(word, index) in shuffled" v-on:click="clickWord(word, index)" v-bind:title="word.english">
           <div class="pinyin">{{ word.pinyin }}</div>
-          <div class="eng">{{ word.english | truncate 5 '....' }}</div>
+          <div class="eng">{{ word.english | truncate }}</div>
         </button>
       </div>
     </div>
@@ -129,6 +129,16 @@ export default {
       this.clickedWord = {};
       this.start()
     }
+  },
+  filters: {
+    truncate: function(value) {
+      let length = 50;
+      if (value.length <= length) {
+        return value;
+      } else {
+        return value.substring(0, length) + '...';
+      }
+    }
   }
 }
 
@@ -151,7 +161,7 @@ export default {
 
   #spaces {
     display: block;
-    margin: 100px auto;
+    margin: 100px auto 30px auto;
     text-align: center;
   }
 
