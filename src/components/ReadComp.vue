@@ -100,10 +100,13 @@ export default {
       })
     },
     clickWord(word, index){
+      let empty = this.wbwState.find(function(i){
+        return i === ''
+      });
+      this.currentIndex = this.wbwState.indexOf(empty)
+      console.log(this.currentIndex);
       this.clickedWord = word;
       this.wbwState[this.currentIndex] = this.clickedWord;
-      console.log(this.wbwState);
-      this.$forceUpdate();
       if (this.wbwState[this.currentIndex] === this.wbw[this.currentIndex].chinese) {
         console.log('matches');
       }
@@ -137,8 +140,7 @@ export default {
     removeTile(word, index){
       this.shuffled.push(word);
       this.wbwState.splice(index, 1, '');
-      this.currentIndex--;
-      console.log('updated wbwState',this.wbwState);
+      this.currentIndex = index;
     },
     next(){
       this.guid = this.$route.params.guid;
