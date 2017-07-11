@@ -6,13 +6,9 @@
     </div>
     <div class="row">
       <div id="spaces" class="medium-8 columns">
-          <!-- <a><div class="space" v-for="(word, index) in unshuffled" v-on:click="appendWord(word, index)">
-            <span v-show="spaceArr[index]">{{ word }}</span>
-          </div></a>
-          <span v-model="punctuation">{{ punctuation }}</span> -->
           <div class="space" v-for="(word, index) in wbw">
-            <div v-show="wbwState[index]">{{ word.pinyin }}</div>
-            <div v-show="wbwState[index] ">{{ word.english }}</div>
+            <div v-show="wbwState[index]" v-bind:style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#000' }">{{ word.pinyin }}</div>
+            <div v-show="wbwState[index]" v-bind:style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#C10E40' }">{{ word.english }}</div>
           </div>
       </div>
       <div id="tiles">
@@ -20,14 +16,13 @@
           <div class="pinyin">{{ word.pinyin }}</div>
           <div class="eng">{{ word.english }}</div>
         </button>
-        <!-- <button class="tile" v-for="tile in tiles" v-on:click="clickWord(tile)">{{ tile }}</button> -->
       </div>
     </div>
     <div class="row" v-show="roundClear">
       <div class="message">
         <h1 id="cheer">Nice Job!</h1>
       </div>
-      <button class="button success" v-on:click="next">Next Sentence</button>
+      <button class="button success large" v-on:click="next">Next Sentence</button>
     </div>
   </div>
 </template>
@@ -86,8 +81,7 @@ export default {
         self.wbw.map(function(i){
           self.wbwState.push('')
         })
-        console.log(self.wbwState);
-        console.log(self.wbw);
+
         let shuffled = self.wbw.slice(), i, j, k;
         for (i = shuffled.length; i; i--) {
           j = Math.floor(Math.random() * i);
@@ -96,7 +90,6 @@ export default {
           shuffled[j] = k;
         }
         self.shuffled = shuffled;
-        console.log(self.shuffled);
       })
     },
     clickWord(word, index){
@@ -109,6 +102,7 @@ export default {
             console.log("we're removing", i);
             self.shuffled.splice(index, 1)
             console.log('updated shuffled', self.shuffled);
+            console.log(self.wbwState);
           }
         })
         this.$forceUpdate();
@@ -158,21 +152,24 @@ export default {
 
   .space {
     display: inline-block;
-    width: 15%;
+    width: 20%;
     height: 5%;
     border: 2px solid #000;
-    margin: 40px 20px;
+    margin: 30px 20px;
     font-family: "Raleway", "Helvetica Neue", sans-serif;
-    font-size: 1.5em;
+    font-size: 2em;
     color: #55CC99;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: #DDD;
   }
 
   .pinyin {
-    color: indigo;
+    color: #000;
   }
 
   .eng {
-    color: Teal;
+    color: #C10E40;
   }
 
   #spaces > span {
@@ -187,10 +184,11 @@ export default {
   }
 
   .tile {
+    line-height: 1.5;
     font-size: 2em;
     border: 2px solid #000;
     margin: 30px 20px;
-    padding: 15px;
+    padding: 8px;
     font-family: "Raleway", "Helvetica Neue", sans-serif;
     border-radius: 15px;
     background-color: #DDD;
