@@ -7,6 +7,7 @@ import router from './router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueTruncate from 'vue-truncate-filter';
+import GetSentences from './mixins/GetSentences';
 
 window.jQuery = jQuery;
 window.$ = jQuery;
