@@ -16,6 +16,7 @@ require('what-input');
 require('foundation-sites');
 
 Vue.use(VueAxios, axios)
+Vue.use(require('vue-cookies'))
 
 /* eslint-disable no-new */
 new Vue({

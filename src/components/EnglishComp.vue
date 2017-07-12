@@ -1,26 +1,25 @@
 <template lang="html">
-  <div class="grid-container" id="read-comp">
+  <div class="grid-container" id="read-comp-2">
     <div class="row" id="heading">
       <h1>Exercises</h1>
-      <h1>{{ chinese }}</h1>
+      <h1>{{ english }}</h1>
     </div>
     <div class="row">
       <div id="spaces" class="medium-8 columns">
           <div class="space" v-for="(word, index) in wbwState" v-on:click="removeTile(word, index)">
-            <div v-show="wbwState[index]" v-bind:style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#000' }">{{ word.pinyin }}</div>
-            <div v-show="wbwState[index]" v-bind:style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#239D1F' }"><b>{{ word.english }}</b></div>
+            <div class="chinese" v-show="wbwState[index]" v-bind:style="{ margin:`${8}px`, color: '#000' }">{{ word.chinese }}</div>
           </div>
       </div>
       <div id="tiles">
         <button class="tile" v-for="(word, index) in shuffled" v-on:click="clickWord(word, index)" v-bind:title="word.english">
-          <div class="pinyin">{{ word.pinyin }}</div>
-          <div class="eng">{{ word.english }}</div>
+          <div class="chinese">{{ word.chinese }}</div>
         </button>
       </div>
     </div>
     <div class="row" v-show="roundClear">
       <div class="message">
-        <h1 id="cheer">{{ english }}</h1>
+        <h1 id="cheer">{{ chinese }}</h1>
+        <h3 id="cheer">{{ pinyin }}</h3>
       </div>
       <button class="button success large" v-on:click="next">Next Sentence</button>
     </div>
@@ -42,6 +41,7 @@ import VueTruncate from 'vue-truncate-filter';
 export default {
   data(){
     return {
+      res: '',
       guid: this.$route.params.guid,
       chinese: '',
       english: '',
@@ -57,14 +57,16 @@ export default {
     }
   },
   mounted(){
-    this.start()
+    if (this.$cookies.get('user')){
+      this.start()
+    }
   },
   methods: {
-    start() {
-      let self = this;
 
+    start(){
+      let self = this;
       let data = {
-        u: this.$route.params.guid,
+        u: this.$cookies.get('user'),
         t: "readComp",
         l: 0,
         g: 0,
@@ -79,16 +81,17 @@ export default {
           'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
         }
       }).then(function(response){
+        self.res = response.data;
         let random = Math.floor(Math.random() * response.data.length)
         let chosenSentence = response.data[random]
-        console.log(chosenSentence);
+        console.log('chosen sentence is', chosenSentence);
         self.chinese = chosenSentence.chinese;
         self.english = chosenSentence.english;
+        self.pinyin = chosenSentence.pinyin;
         self.wbw = chosenSentence.wbw;
         self.wbw.map(function(i){
           self.wbwState.push('')
         })
-
         let shuffled = self.wbw.slice(), i, j, k;
         for (i = shuffled.length; i; i--) {
           j = Math.floor(Math.random() * i);
@@ -103,8 +106,7 @@ export default {
       let empty = this.wbwState.find(function(i){
         return i === ''
       });
-      this.currentIndex = this.wbwState.indexOf(empty)
-      console.log(this.currentIndex);
+      this.currentIndex = this.wbwState.indexOf(empty);
       this.clickedWord = word;
       this.wbwState[this.currentIndex] = this.clickedWord;
       if (this.wbwState[this.currentIndex] === this.wbw[this.currentIndex].chinese) {
@@ -118,9 +120,8 @@ export default {
       })
       this.currentIndex++;
 
-      //check if the wbwState and wbw matches
+      // check if the wbwState and wbw matches
       if (this.match(this.wbw, this.wbwState)){
-        console.log('they match!');
         this.roundClear = true;
       } else {
         console.log('no match');
@@ -157,22 +158,11 @@ export default {
       this.start()
     }
   },
-  filters: {
-    truncate: function(value) {
-      let length = 50;
-      if (value.length <= length) {
-        return value;
-      } else {
-        return value.substring(0, length) + '...';
-      }
-    }
-  }
 }
-
 </script>
 
 <style lang="css">
-  #read-comp {
+  #read-comp-2 {
     height: 100vh;
   }
 
@@ -198,19 +188,15 @@ export default {
     height: 5%;
     border: 2px solid #000;
     margin: 40px 20px;
-    font-family: "Raleway", "Helvetica Neue", sans-serif;
+    font-family: "Tahoma", "Raleway", "Helvetica Neue", sans-serif;
     color: #55CC99;
     cursor: pointer;
     border-radius: 15px;
     background-color: #DDD;
   }
 
-  .space div:first-child {
+  .space div {
     font-size: 1.5em;
-  }
-
-  .space div:last-child {
-    font-size: 1em;
   }
 
   #spaces > span {
@@ -230,7 +216,7 @@ export default {
     border: 2px solid #000;
     margin: 30px 20px;
     padding: 8px;
-    font-family: "Raleway", "Helvetica Neue", sans-serif;
+    font-family: "Tahoma", "Raleway", "Helvetica Neue", sans-serif;
     border-radius: 15px;
     background-color: #DDD;
     cursor: pointer;
@@ -256,6 +242,4 @@ export default {
     margin: 100px auto;
     display: block;
   }
-
-
 </style>

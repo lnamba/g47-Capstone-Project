@@ -58,30 +58,9 @@ export default {
       }).then(function(response) {
         self.userInfo = response.data;
         // need auth here
-        self.$router.push({name: 'reading-comprehension', params: {guid:self.userInfo.uniqueID }});
+        self.$cookies.set('user', self.userInfo.uniqueID, 'session')
+        self.$router.push({name: 'chinese-comprehension', params: {guid:self.userInfo.uniqueID }});
       })
-  //     const url = "https://www.hanyu.co/ajax/login.aspx";
-  //     var x = new XMLHttpRequest();
-  //     var credentials = "{ 'email' : '" + this.email + "', 'password' : '" + this.password + "' }";
-  //
-  //     x.open('POST', url);
-  //     x.responseType = 'json';
-  //
-  //     x.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
-  //
-  //     x.onload = function () {
-  //     console.log('this is the response', x.response);
-  //     var response = x.response;
-  //       if (x.readyState == 4 && x.status == 200) {
-  //         if (response != null) {
-  //           this.data = response;
-  //         }
-  //       }
-  //     }
-  //     x.send(credentials);
-  //     console.log(this.data);
-  //     // this.$router.myProps.guid = response;
-  //     this.$router.push('read');
     }
   }
 };
