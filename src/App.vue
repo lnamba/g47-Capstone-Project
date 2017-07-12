@@ -5,6 +5,7 @@
         <li class="logo">
           <router-link to="/">Title</router-link>
         </li>
+        <li class="logo" id="logout" v-if="this.$cookies.get('user')" @click="logout"><a>Logout</a></li>
       </ul>
     </div>
     <div class="content-wrapper">
@@ -17,9 +18,26 @@
 </template>
 
 <script>
+
 export default {
   name: 'app',
-
+  data(){
+    return {
+      loggedIn: false,
+    }
+  },
+  mounted(){
+    if (this.$cookies.get('user')) {
+      this.loggedIn = true;
+    }
+  },
+  methods: {
+    logout(){
+      this.loggedIn = false;
+      this.$cookies.remove('user');
+      this.$router.push({path:'/'});
+    }
+  }
 };
 </script>
 
@@ -40,14 +58,7 @@ export default {
     font-weight: normal;
   }
 
-  li a.menu-button {
-    border-radius: 20px;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    display: inline-block;
-    float: right;
+  #logout {
   }
 
   .content-wrapper {
@@ -59,7 +70,7 @@ export default {
   }
 
   // Custom Styles
-  
+
   #heading h1:first-child {
     margin-top: 20px;
 
