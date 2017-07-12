@@ -6,26 +6,26 @@
     </div>
     <div class="row">
       <div id="spaces" class="medium-8 columns">
-          <div class="space" v-for="(word, index) in wbwState" v-on:click="removeTile(word, index)">
-            <div class="chinese" v-show="wbwState[index]" v-bind:style="{ margin:`${8}px`, color: '#000' }">{{ word.chinese }}</div>
+          <div class="space" v-for="(word, index) in wbwState" @click="removeTile(word, index)">
+            <div v-show="wbwState[index]" :class="{chinese}" :style="{ margin:`${8}px`, color: '#000' }">{{ word.chinese }}</div>
           </div>
       </div>
       <div id="tiles">
-        <button class="tile" v-for="(word, index) in shuffled" v-on:click="clickWord(word, index)" v-bind:title="word.english">
+        <button class="tile" v-for="(word, index) in shuffled" @click="clickWord(word, index)" :title="word.pinyin">
           <div class="chinese">{{ word.chinese }}</div>
         </button>
       </div>
     </div>
     <div class="row" v-show="roundClear">
       <div class="message">
-        <h1 id="cheer">{{ chinese }}</h1>
-        <h3 id="cheer">{{ pinyin }}</h3>
+        <h1 class="cheer">{{ chinese }}</h1>
+        <h3 class="cheer">{{ pinyin }}</h3>
       </div>
-      <button class="button success large" v-on:click="next">Next Sentence</button>
+      <button class="button success large" @click="next">Next Sentence</button>
     </div>
     <div class="row" v-show="!match(wbw, wbwState) && !wbwState.includes('')">
       <div class="message">
-        <h1 id="encourage">Keep Trying!</h1>
+        <h1 class="encourage">Keep Trying!</h1>
       </div>
     </div>
   </div>
@@ -36,12 +36,10 @@ import Router from 'vue-router';
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import VueTruncate from 'vue-truncate-filter';
 
 export default {
   data(){
     return {
-      res: '',
       guid: this.$route.params.guid,
       chinese: '',
       english: '',
@@ -53,7 +51,6 @@ export default {
       currentIndex: 0,
       roundClear: false,
       clickedWord: {},
-      roundOver: false,
     }
   },
   mounted(){
@@ -82,8 +79,14 @@ export default {
         }
       }).then(function(response){
         self.res = response.data;
-        let random = Math.floor(Math.random() * response.data.length)
-        let chosenSentence = response.data[random]
+        console.log(response.data);
+        let chosenSentence;
+        while(!chosenSentence){
+          let random = Math.floor(Math.random() * response.data.length)
+          if(response.data[random].wbw.length > 1) {
+            chosenSentence = response.data[random]
+          }
+        }
         console.log('chosen sentence is', chosenSentence);
         self.chinese = chosenSentence.chinese;
         self.english = chosenSentence.english;
@@ -161,85 +164,13 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
   #read-comp-2 {
     height: 100vh;
   }
 
-  #heading h1:first-child {
-    margin-top: 20px;
-
+  .chinese {
+    font-size: 2.5em;
   }
 
-  #heading h1:last-child {
-    text-align: center;
-    margin-top: 40px;
-  }
-
-  #spaces {
-    display: block;
-    margin: 100px auto 80px auto;
-    text-align: center;
-  }
-
-  .space {
-    display: inline-block;
-    width: 20%;
-    height: 5%;
-    border: 2px solid #000;
-    margin: 40px 20px;
-    font-family: "Tahoma", "Raleway", "Helvetica Neue", sans-serif;
-    color: #55CC99;
-    cursor: pointer;
-    border-radius: 15px;
-    background-color: #DDD;
-  }
-
-  .space div {
-    font-size: 1.5em;
-  }
-
-  #spaces > span {
-    font-size: 3em;
-    margin: 0;
-    display: inline-block;
-    height: 50px;
-  }
-
-  #tiles {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-
-  .tile {
-    line-height: 1.5;
-    border: 2px solid #000;
-    margin: 30px 20px;
-    padding: 8px;
-    font-family: "Tahoma", "Raleway", "Helvetica Neue", sans-serif;
-    border-radius: 15px;
-    background-color: #DDD;
-    cursor: pointer;
-    width: 20%;
-  }
-
-  .pinyin {
-    color: #000;
-    font-size: 1.5em;
-  }
-
-  .eng {
-    color: #C10E40;
-    font-size: 1em;
-  }
-
-  #cheer, #encourage {
-    text-align: center;
-    margin: 50px auto;
-  }
-
-  button.success {
-    margin: 100px auto;
-    display: block;
-  }
 </style>

@@ -30,6 +30,7 @@ export default {
   @import url('https://fonts.googleapis.com/css?family=Raleway');
 
   // Chrome Reset
+
   a:focus {
     outline: none;
   }
@@ -52,25 +53,79 @@ export default {
   .content-wrapper {
   }
 
-  .sidebar-menu {
-    @include menu-base();
-    @include menu-direction(vertical);
-    a {
-      color: $secondary-color;
-      font-weight: normal;
-    }
-    a.active {
-      font-weight: 600;
-      color: $primary-color;
-    }
-  }
 
   .top-bar, .logo, .logo ~ li, .bottom-bar {
     background-color: #333;
   }
 
-  .menu-button{
-    background-color: #9b2f33;
+  // Custom Styles
+  
+  #heading h1:first-child {
+    margin-top: 20px;
+
+  }
+
+  #heading h1:last-child {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .chinese {
+    font-family: 'Yuanti SC';
+    font-weight: 100;
+  }
+
+  #spaces {
+    display: block;
+    margin: 100px auto 80px auto;
+    text-align: center;
+  }
+
+  .space {
+    display: inline-block;
+    width: 20%;
+    height: 5%;
+    border: 2px solid #000;
+    margin: 40px 20px;
+    font-family: "Tahoma", "Raleway", "Helvetica Neue", sans-serif;
+    color: #55CC99;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: #DDD;
+  }
+
+  #spaces > span {
+    font-size: 3em;
+    margin: 0;
+    display: inline-block;
+    height: 50px;
+  }
+
+  #tiles {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .tile {
+    line-height: 1.5;
+    border: 2px solid #000;
+    margin: 30px 20px;
+    padding: 8px;
+    font-family: "Tahoma", "Raleway", "Helvetica Neue", sans-serif;
+    border-radius: 15px;
+    background-color: #DDD;
+    cursor: pointer;
+    width: 20%;
+  }
+
+  .cheer, .encourage {
+    text-align: center;
+    margin: 50px auto;
+  }
+
+  button.success {
+    margin: 100px auto;
+    display: block;
   }
 
   #bottom-bar {

@@ -16,6 +16,6 @@ export default new Router({
     { name: 'home', path: '/', props: true, component: Home },
     { name: 'chinese-comprehension', path: '/readcomp1', props: true, component: ChineseComp },
     { name: 'english-comprehension', path: '/readcomp2', props: true, component: EnglishComp },
-    { name: 'listening-comprehension', path: '/listen', props: true, component: ListenComp },
+    { name: 'listening-comprehension', path: '/listencomp', props: true, component: ListenComp },
   ],
 });
