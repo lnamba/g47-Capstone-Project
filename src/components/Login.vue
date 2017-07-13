@@ -58,8 +58,9 @@ export default {
       }).then(function(response) {
         self.userInfo = response.data;
         // need auth here
+        console.log(response.data);
         self.$cookies.set('user', self.userInfo.uniqueID, 'session')
-        self.$router.push({name: 'chinese-comprehension', params: {guid:self.userInfo.uniqueID }});
+        self.$router.push({name: 'sentences', params: {guid:self.userInfo.uniqueID }});
       })
     }
   }

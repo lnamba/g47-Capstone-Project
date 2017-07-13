@@ -7,7 +7,10 @@ import router from './router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueTruncate from 'vue-truncate-filter';
-import GetSentences from './mixins/GetSentences';
+import ChineseComp from '@/components/ChineseComp';
+import EnglishComp from '@/components/EnglishComp';
+import ListenComp from '@/components/ListenComp';
+import { store } from './Store';
 
 window.jQuery = jQuery;
 window.$ = jQuery;
@@ -19,10 +22,15 @@ require('foundation-sites');
 Vue.use(VueAxios, axios)
 Vue.use(require('vue-cookies'))
 
+Vue.component('chinese-comprehension', ChineseComp);
+Vue.component('english-comprehension', EnglishComp);
+Vue.component('listening-comprehension', ListenComp);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App },
 });

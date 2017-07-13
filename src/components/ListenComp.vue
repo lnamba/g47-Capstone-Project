@@ -35,26 +35,60 @@
 <script>
 import Router from 'vue-router';
 import Vue from 'vue';
-import axios from 'axios';
-import VueAxios from 'vue-axios';
 import GetSentences from '../mixins/GetSentences';
 
 export default {
   data(){
     return {
-      audio: '',
-      guid: this.$route.params.guid,
-      chinese: '',
-      english: '',
-      pinyin: '',
-      wbw: [],
-      wbwState: [],
-      unshuffled: [],
-      shuffled: [],
       currentIndex: 0,
       roundClear: false,
-      clickedWord: {},
+      clickedWord: ''
     }
+  },
+  mounted(){
+    this.$store.dispatch('SENTENCE_TRACKER')
+  },
+  computed: {
+    audio(){
+      console.log(this.$store.state.chinese);
+      return this.$store.state.audio;
+    },
+    sentence(){
+      return this.$store.state.sentence;
+    },
+    res(){
+      return this.$store.state.res;
+    },
+    chinese(){
+      return this.$store.state.chinese;
+    },
+    english(){
+      return this.$store.state.english;
+    },
+    pinyin(){
+      return this.$store.state.pinyin;
+    },
+    wbw(){
+      return this.$store.state.wbw;
+    },
+    wbwState(){
+      return this.$store.state.wbwState;
+    },
+    unshuffled(){
+      return this.$store.state.unshuffled;
+    },
+    shuffled(){
+      return this.$store.state.shuffled;
+    },
+    // currentIndex(){
+    //   return this.$store.state.currentIndex;
+    // },
+    // roundClear(){
+    //   return this.$store.state.roundClear;
+    // },
+    // clickedWord(){
+    //   return this.$store.state.clickedWord;
+    // },
   },
   methods: {
     replay(){
@@ -63,25 +97,25 @@ export default {
       audio.play()
     },
     clickWord(word, index){
-      let empty = this.wbwState.find(function(i){
+      let empty = this.$store.state.wbwState.find(function(i){
         return i === ''
       });
-      this.currentIndex = this.wbwState.indexOf(empty);
+      this.currentIndex = this.$store.state.wbwState.indexOf(empty);
       this.clickedWord = word;
-      this.wbwState[this.currentIndex] = this.clickedWord;
-      if (this.wbwState[this.currentIndex] === this.wbw[this.currentIndex].chinese) {
+      this.$store.state.wbwState[this.currentIndex] = this.clickedWord;
+      if (this.$store.state.wbwState[this.currentIndex] === this.$store.state.wbw[this.currentIndex].chinese) {
         console.log('matches');
       }
       let self = this;
-      this.shuffled.map(function(i, index){
+      this.$store.state.shuffled.map(function(i, index){
         if (i === word) {
-          self.shuffled.splice(index, 1)
+          self.$store.state.shuffled.splice(index, 1)
         }
       })
       this.currentIndex++;
 
       // check if the wbwState and wbw matches
-      if (this.match(this.wbw, this.wbwState)){
+      if (this.match(this.wbw, this.$store.state.wbwState)){
         this.roundClear = true;
       } else {
         console.log('no match');
@@ -99,24 +133,15 @@ export default {
       return true;
     },
     removeTile(word, index){
-      this.shuffled.push(word);
-      this.wbwState.splice(index, 1, '');
+      this.$store.state.shuffled.push(word);
+      this.$store.state.wbwState.splice(index, 1, '');
       this.currentIndex = index;
     },
     next(){
-      this.audio = '';
-      this.guid = this.$route.params.guid;
-      this.chinese = '';
-      this.english = '';
-      this.pinyin = '';
-      this.wbw = [];
-      this.wbwState = [];
-      this.unshuffled = [];
-      this.shuffled = [];
-      this.currentIndex = 0;
+      this.currentIndex = 0
       this.roundClear = false;
-      this.clickedWord = {};
-      this.start()
+      this.clickedWord = '';
+      this.$store.dispatch('SENTENCE_TRACKER')
     }
   },
   mixins: [ GetSentences ]
