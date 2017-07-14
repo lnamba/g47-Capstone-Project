@@ -41,7 +41,8 @@ export default {
     return {
       currentIndex: 0,
       roundClear: false,
-      clickedWord: ''
+      clickedWord: '',
+      matchFirstTry: true,
     }
   },
   mounted(){
@@ -97,10 +98,15 @@ export default {
 
       // check ifthis.$store.state.wbwState and wbw matches
       if (this.match(this.$store.state.wbw, this.$store.state.wbwState)){
+        console.log('matches');
+        if (this.matchFirstTry){
+          this.$store.state.sentencePoints++;
+          console.log(this.$store.state.sentencePoints);
+        }
         this.roundClear = true;
-        console.log('match');
-      } else if (!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')){
+      } else if(!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')) {
         console.log('no match');
+        this.matchFirstTry = false;
       }
     },
     match(arr1, arr2){
@@ -120,6 +126,7 @@ export default {
       this.currentIndex = index;
     },
     next(){
+      this.matchFirstTry = true;
       this.currentIndex = 0
       this.roundClear = false;
       this.clickedWord = '';

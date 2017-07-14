@@ -57,7 +57,7 @@ export const store = new Vuex.Store({
         state.endRound = false;
         state.currSent = 0;
         state.wbwState = []
-        // state.sentencePoints = 0;
+        state.sentencePoints = 0;
         commit('SET_SENTENCES', {sentData: response.data})
       })
     },
@@ -74,7 +74,7 @@ export const store = new Vuex.Store({
         state.currSent++
       } else {
         state.endRound = true;
-        // console.log(state.sentencePoints);
+        console.log(state.sentencePoints);
         router.push({name:'summary'})
       }
       let arr = []

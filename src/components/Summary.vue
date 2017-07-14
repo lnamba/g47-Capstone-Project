@@ -2,16 +2,21 @@
   <div class="grid-container">
     <div class="row">
       <h1>Exercise Summary</h1>
+      <h2>You got {{points}}/4 points!</h2>
     </div>
     <div class="row">
       <button class="button success large" @click="nextRound">Next Round</button>
-      <!-- <router-link :to="{ path: '/sentences' }"><button class="button success large">Next Round</button></router-link> -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data(){
+    return {
+      points: this.$store.state.sentencePoints,
+    }
+  },
   methods: {
     nextRound(){
       this.$store.state.hidebutton = false;
