@@ -2,7 +2,7 @@
   <div class="grid-container">
     <div v-if="!hidebutton">
       <h1>Welcome, {{ name }}!</h1>
-      <img :src="avatar" alt="">
+      <img :src="avatar" alt="avatar">
       <button class="button success large" @click="startGame">Start!</button>
     </div>
 
@@ -20,23 +20,27 @@ export default {
   data() {
     return {
       sentence: 0,
-      hidebutton: false,
       name: `${this.$cookies.get('name')}`,
       avatar: `${this.$cookies.get('avatar')}`,
     }
   },
   created(){
     this.$store.dispatch('GET_SENTENCES')
+
   },
   methods: {
     startGame(){
+      this.$store.state.endRound = false;
       this.sentence = Math.floor(Math.random() * 3);
-      this.hidebutton = true;
+      this.$store.state.hidebutton = true;
     },
   },
   computed: {
     res(){
       return this.$store.state.res;
+    },
+    hidebutton(){
+      return this.$store.state.hidebutton;
     },
   }
 }

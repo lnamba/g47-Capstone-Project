@@ -44,7 +44,8 @@ export default {
       currentIndex: 0,
       roundClear: false,
       clickedWord: '',
-      sentencePoints: 0
+      // sentencePoints: 0,
+      matchFirstTry: true,
     }
   },
   mounted(){
@@ -52,6 +53,7 @@ export default {
   },
   computed: {
     sentence(){
+      console.log(this.$store.state.sentence);
       return this.$store.state.sentence;
     },
     chinese(){
@@ -78,6 +80,9 @@ export default {
     correctAnswers(){
       return this.$store.state.correctAnswers;
     },
+    sentencePoints(){
+      return this.$store.state.sentencePoints;
+    },
   },
   methods: {
     clickWord(word, index){
@@ -96,10 +101,20 @@ export default {
       this.currentIndex++;
 
       //check ifthis.$store.state.wbwState and wbw matches
+      // if (this.match(this.$store.state.wbw, this.$store.state.wbwState)){
+      //   console.log('matches');
+      //   if (this.matchFirstTry === true){
+      //     this.$store.state.sentencePoints++;
+      //   }
+      //   this.roundClear = true;
+      // } else if(!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')) {
+      //   console.log('no match');
+      //   this.matchFirstTry = false;
+      // }
       if (this.match(this.$store.state.wbw, this.$store.state.wbwState)){
-        console.log('matches');
         this.roundClear = true;
-      } else if(!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')) {
+        console.log('match');
+      } else if (!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')){
         console.log('no match');
       }
     },
@@ -120,6 +135,7 @@ export default {
       this.currentIndex = index;
     },
     next(){
+
       this.currentIndex = 0
       this.roundClear = false;
       this.clickedWord = '';

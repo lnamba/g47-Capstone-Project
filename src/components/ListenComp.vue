@@ -84,6 +84,9 @@ export default {
     correctAnswers(){
       return this.$store.state.correctAnswers;
     },
+    sentencePoints(){
+      return this.$store.state.sentencePoints;
+    },
   },
   methods: {
     replay(){

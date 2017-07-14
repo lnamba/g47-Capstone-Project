@@ -19,8 +19,10 @@ export const store = new Vuex.Store({
     wbwState: [],
     shuffled: [],
     currSent: 0,
+    sentencePoints: 0,
     correctAnswers: [],
     endRound: false,
+    hidebutton: false,
   },
   getters: {
 
@@ -44,8 +46,18 @@ export const store = new Vuex.Store({
           'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
         }
       }).then(function(response){
-        console.log(response.data);
+        console.log(response.data)
+        state.audio = '';
+        state.chinese = '';
+        state.english = '';
+        state.pinyin = '';
+        state.wbw = [];
+        state.wbwState = [];
+        state.shuffled = [];
         state.endRound = false;
+        state.currSent = 0;
+        state.wbwState = []
+        // state.sentencePoints = 0;
         commit('SET_SENTENCES', {sentData: response.data})
       })
     },
@@ -62,6 +74,7 @@ export const store = new Vuex.Store({
         state.currSent++
       } else {
         state.endRound = true;
+        // console.log(state.sentencePoints);
         router.push({name:'summary'})
       }
       let arr = []
