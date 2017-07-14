@@ -60,7 +60,9 @@ export default {
         // need auth here
         console.log(response.data);
         self.$cookies.set('user', self.userInfo.uniqueID, 'session')
-        self.$router.push({name: 'sentences', params: {guid:self.userInfo.uniqueID }});
+        self.$cookies.set('name', self.userInfo.firstName, 'session')
+        self.$cookies.set('avatar', self.userInfo.avatar, 'session')
+        self.$router.push({name: 'sentences', params: { guid:self.userInfo.uniqueID, name:self.userInfo.firstName, avatar: self.userInfo.avatar }});
       })
     }
   }

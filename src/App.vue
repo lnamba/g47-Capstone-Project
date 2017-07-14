@@ -35,6 +35,8 @@ export default {
     logout(){
       this.loggedIn = false;
       this.$cookies.remove('user');
+      this.$cookies.remove('name');
+      this.$cookies.remove('avatar');
       this.$router.push({path:'/'});
     }
   }

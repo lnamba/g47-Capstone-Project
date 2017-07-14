@@ -1,6 +1,8 @@
 <template lang="html">
   <div class="grid-container">
     <div v-if="!hidebutton">
+      <h1>Welcome, {{ name }}!</h1>
+      <img :src="avatar" alt="">
       <button class="button success large" @click="startGame">Start!</button>
     </div>
 
@@ -19,6 +21,8 @@ export default {
     return {
       sentence: 0,
       hidebutton: false,
+      name: `${this.$cookies.get('name')}`,
+      avatar: `${this.$cookies.get('avatar')}`,
     }
   },
   created(){
@@ -39,6 +43,17 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  h1 {
+    margin-top: 30px;
+  }
+
+  img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin-top: 40px;
+  }
+
   button{
     cursor: pointer;
   }
