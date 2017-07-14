@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Router from 'vue-router';
+import router from './router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
@@ -9,8 +9,8 @@ Vue.use(require('vue-cookies'))
 
 export const store = new Vuex.Store({
   state: {
+    router,
     res: [],
-    // sentence: 0,
     audio: '',
     chinese: '',
     english: '',
@@ -19,13 +19,14 @@ export const store = new Vuex.Store({
     wbwState: [],
     shuffled: [],
     currSent: 0,
+    correctAnswers: [],
     endRound: false,
   },
   getters: {
 
   },
   actions: {
-    GET_SENTENCES({commit}){
+    GET_SENTENCES({commit, state}){
       let self = this;
       let data = {
         u: $cookies.get('user'),
@@ -44,15 +45,15 @@ export const store = new Vuex.Store({
         }
       }).then(function(response){
         console.log(response.data);
+        state.endRound = false;
         commit('SET_SENTENCES', {sentData: response.data})
       })
     },
     SENTENCE_TRACKER({commit, state}){
       let chosenSentence
-      console.log(state.currSent);
       if(state.currSent < state.res.length) {
         chosenSentence = state.res[state.currSent];
-        // commit('SENTENCE', {sentenceData:Math.floor(Math.random() * 3)})
+        console.log(chosenSentence);
         commit('CHINESE', {chineseData:chosenSentence.chinese})
         commit('ENGLISH', {englishData:chosenSentence.english})
         commit('PINYIN', {pinyinData:chosenSentence.pinyin})
@@ -61,7 +62,7 @@ export const store = new Vuex.Store({
         state.currSent++
       } else {
         state.endRound = true;
-
+        router.push({name:'summary'})
       }
       let arr = []
       state.wbw.map(function(i){
@@ -77,14 +78,14 @@ export const store = new Vuex.Store({
         shuffled[j] = k;
       }
       commit('SHUFFLED', {shuffledData: shuffled})
-    }
+    },
   },
   mutations: {
     SET_SENTENCES(state, {sentData}){
       state.res = sentData;
     },
     SENTENCE(state, {sentenceData}){
-      state.sentence = sentence;
+      state.sentence = sentenceData;
     },
     CHINESE(state, {chineseData}){
       state.chinese = chineseData;

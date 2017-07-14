@@ -45,12 +45,12 @@ export default {
       clickedWord: ''
     }
   },
-  mounted(){
-    this.$store.dispatch('SENTENCE_TRACKER')
+  created(){
+    this.$store.dispatch('SENTENCE_TRACKER');
+
   },
   computed: {
     audio(){
-      console.log(this.$store.state.chinese);
       return this.$store.state.audio;
     },
     sentence(){
@@ -60,6 +60,7 @@ export default {
       return this.$store.state.res;
     },
     chinese(){
+      console.log(this.$store.state.chinese);
       return this.$store.state.chinese;
     },
     english(){
@@ -80,15 +81,6 @@ export default {
     shuffled(){
       return this.$store.state.shuffled;
     },
-    // currentIndex(){
-    //   return this.$store.state.currentIndex;
-    // },
-    // roundClear(){
-    //   return this.$store.state.roundClear;
-    // },
-    // clickedWord(){
-    //   return this.$store.state.clickedWord;
-    // },
   },
   methods: {
     replay(){
