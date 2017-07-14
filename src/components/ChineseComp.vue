@@ -44,6 +44,7 @@ export default {
       currentIndex: 0,
       roundClear: false,
       clickedWord: '',
+      sentencePoints: 0
     }
   },
   mounted(){
@@ -74,15 +75,9 @@ export default {
     shuffled(){
       return this.$store.state.shuffled;
     },
-    // currentIndex(){
-    //   return this.$store.state.currentIndex;
-    // },
-    // roundClear(){
-    //   return this.$store.state.roundClear;
-    // },
-    // clickedWord(){
-    //   return this.$store.state.clickedWord;
-    // },
+    correctAnswers(){
+      return this.$store.state.correctAnswers;
+    },
   },
   methods: {
     clickWord(word, index){
@@ -92,9 +87,6 @@ export default {
       this.currentIndex = this.$store.state.wbwState.indexOf(empty);
       this.clickedWord = word;
       this.$store.state.wbwState[this.currentIndex] = this.clickedWord;
-      if (this.$store.state.wbwState[this.currentIndex] === this.$store.state.wbw[this.currentIndex].chinese) {
-        console.log('matches');
-      }
       let self = this;
       this.$store.state.shuffled.map(function(i, index){
         if (i === word) {
@@ -104,9 +96,10 @@ export default {
       this.currentIndex++;
 
       //check ifthis.$store.state.wbwState and wbw matches
-      if (this.match(this.wbw, this.$store.state.wbwState)){
+      if (this.match(this.$store.state.wbw, this.$store.state.wbwState)){
+        console.log('matches');
         this.roundClear = true;
-      } else {
+      } else if(!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')) {
         console.log('no match');
       }
     },

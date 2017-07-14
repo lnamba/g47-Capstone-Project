@@ -81,6 +81,9 @@ export default {
     shuffled(){
       return this.$store.state.shuffled;
     },
+    correctAnswers(){
+      return this.$store.state.correctAnswers;
+    },
   },
   methods: {
     replay(){
@@ -107,9 +110,10 @@ export default {
       this.currentIndex++;
 
       // check if the wbwState and wbw matches
-      if (this.match(this.wbw, this.$store.state.wbwState)){
+      if (this.match(this.$store.state.wbw, this.$store.state.wbwState)){
         this.roundClear = true;
-      } else {
+        console.log('match');
+      } else if (!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')){
         console.log('no match');
       }
     },

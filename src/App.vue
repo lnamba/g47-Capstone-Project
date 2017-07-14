@@ -72,7 +72,7 @@ export default {
   // Custom Styles
 
   #heading h1:first-child {
-    margin-top: 20px;
+    margin-top: 30px;
 
   }
 
