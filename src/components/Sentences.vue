@@ -2,7 +2,8 @@
   <div class="grid-container">
     <div v-if="!hidebutton">
       <h1>Welcome, {{ name }}!</h1>
-      <img :src="avatar" alt="avatar">
+      <img :src="avatar" alt="avatar" v-if="avatar !== 'null'">
+      <img src="../assets/img/blankUser.png" alt="avatar" v-else>
       <button class="button success large" @click="startGame">Start!</button>
     </div>
 
