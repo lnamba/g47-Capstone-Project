@@ -3,7 +3,7 @@
       <div id="login">
         <div id="inner">
           <form v-on:submit.prevent="submitForm">
-            <h1><b>Login</b></h1>
+            <h1>Login</h1>
             <div class="row">
               <div class="medium-6 columns">
                 <label>Email Address:

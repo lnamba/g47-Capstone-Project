@@ -1,12 +1,11 @@
 <template>
   <div id="app">
-    <div class="top-bar">
-      <ul class="menu expanded">
-        <li class="logo">
-          <router-link to="/">Title</router-link>
-        </li>
-        <li class="logo" id="logout" v-if="this.$cookies.get('user')" @click="logout"><a>Logout</a></li>
-      </ul>
+    <div class="top-bar grid-x">
+      <li class="logo small-2 cell">
+        <img id="logo" src="./assets/img/logo4white.png" alt="logo">
+        <router-link to="/">HANYU.CO</router-link>
+      </li>
+      <li class="text-center logo small-1 cell" id="logout" v-if="this.$cookies.get('user')" @click="logout"><a>Logout</a></li>
     </div>
     <div class="content-wrapper">
       <router-view></router-view>
@@ -57,21 +56,31 @@ export default {
 
   .logo, .logo a {
     color: $white;
-    font-weight: normal;
-  }
-
-  #logout {
-  }
-
-  .content-wrapper {
-  }
-
-
-  .top-bar, .logo, .logo ~ li, .bottom-bar {
-    background-color: #333;
   }
 
   // Custom Styles
+
+  #logo {
+    height: 40px;
+    width: 40px;
+  }
+
+  .top-bar, .logo, .bottom-bar {
+    background-color: #333;
+    list-style-type: none;
+  }
+
+  .top-bar li:first-child {
+    font-size: 1.2em;
+    line-height: 35px;
+    font-weight: 100;
+    font-family: 'Raleway', sans-serif;
+  }
+
+  #logout a {
+    font-family: 'Helvetica Neue', Helvetica, 'Roboto', Arial, sans-serif;
+    font-size: 1em;
+  }
 
   #heading h1:first-child {
     margin-top: 30px;

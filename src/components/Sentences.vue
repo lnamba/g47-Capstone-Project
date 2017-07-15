@@ -1,17 +1,18 @@
 <template lang="html">
   <div class="grid-container">
-    <div v-if="!hidebutton">
-      <h1>Welcome, {{ name }}!</h1>
-      <img :src="avatar" alt="avatar" v-if="avatar !== 'null'">
-      <img src="../assets/img/blankUser.png" alt="avatar" v-else>
-      <button class="button success large" @click="startGame">Start!</button>
+    <div v-if="!hidebutton" class="grid-x grid-margin-x">
+      <div class="cell medium-12 large-offset-1">
+        <h1>Welcome, {{ name }}!</h1>
+        <img :src="avatar" alt="avatar" v-if="avatar !== 'null'">
+        <img src="../assets/img/blankUser.png" alt="avatar" v-else>
+        <button class="button success large" @click="startGame">Start!</button>
+      </div>
     </div>
 
     <div v-if="hidebutton">
       <chinese-comprehension v-if="sentenceType === 0"></chinese-comprehension>
       <english-comprehension v-else-if="sentenceType === 1"></english-comprehension>
       <listening-comprehension v-else></listening-comprehension>
-      <!-- <span v-else>Component failed {{sentenceType}}</span> -->
     </div>
   </div>
 </template>

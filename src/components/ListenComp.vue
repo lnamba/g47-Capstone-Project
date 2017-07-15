@@ -114,6 +114,7 @@ export default {
 
       // check if the wbwState and wbw matches
       if (this.match(this.$store.state.wbw, this.$store.state.wbwState)){
+        this.replay()
         if (this.matchFirstTry){
           this.$store.state.sentencePoints++;
           this.$store.state.correctAnswers.push({Xref:`${this.$store.state.sentenceId}`, Score:'1'})

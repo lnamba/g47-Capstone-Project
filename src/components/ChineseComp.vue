@@ -2,6 +2,7 @@
   <div class="grid-container" id="read-comp-1">
     <div class="row" id="heading">
       <h1>Exercises</h1>
+      <audio id="audio" :src="audio" autoplay></audio>
       <h1 class="chinese">{{ chinese }}</h1>
     </div>
     <div class="row">
@@ -55,6 +56,9 @@ export default {
     sentence(){
       return this.$store.state.sentence;
     },
+    audio(){
+      return this.$store.state.audio;
+    },
     sentenceId(){
       return this.$store.state.sentenceId;
     },
@@ -88,6 +92,7 @@ export default {
   },
   methods: {
     clickWord(word, index){
+
       let empty = this.$store.state.wbwState.find(function(i){
         return i === ''
       });
@@ -110,6 +115,8 @@ export default {
         } else {
           this.$store.state.correctAnswers.push({Xref:`${this.$store.state.sentenceId}`, Score:'3'})
         }
+        console.log('wbw', this.$store.state.wbw);
+        console.log('whwState', this.$store.state.wbwState);
         this.roundClear = true;
       } else if(!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')) {
         this.matchFirstTry = false;
