@@ -103,7 +103,7 @@ export default {
       this.clickedWord = word;
       this.$store.state.wbwState[this.currentIndex] = this.clickedWord;
       if (this.$store.state.wbwState[this.currentIndex] === this.$store.state.wbw[this.currentIndex].chinese) {
-        console.log('matches');
+        // console.log('matches');
       }
       let self = this;
       this.$store.state.shuffled.map(function(i, index){
@@ -115,14 +115,13 @@ export default {
 
       // check if the wbwState and wbw matches
       if (this.match(this.$store.state.wbw, this.$store.state.wbwState)){
-        console.log('matches');
+        // console.log('matches');
         if (this.matchFirstTry){
           this.$store.state.sentencePoints++;
-          console.log(this.$store.state.sentencePoints);
         }
         this.roundClear = true;
       } else if(!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')) {
-        console.log('no match');
+        // console.log('no match');
         this.matchFirstTry = false;
       }
     },
@@ -143,14 +142,20 @@ export default {
       this.currentIndex = index;
     },
     next(){
+      console.log("next was clicked");
+
       this.matchFirstTry = true;
       this.currentIndex = 0
       this.roundClear = false;
       this.clickedWord = '';
+      window.sentenceType = Math.floor(Math.random()*3)+1
+      console.log(window.sentenceType);
+      // this.$store.dispatch('RANDOMIZE_SENTENCE')
+      // this.$store.state.sentenceType = Math.floor(Math.random()*3)
+      // localStorage.setItem("sentenceType", Math.floor(Math.random() * 3));
       this.$store.dispatch('SENTENCE_TRACKER')
     }
   },
-  mixins: [ GetSentences ]
 }
 </script>
 
