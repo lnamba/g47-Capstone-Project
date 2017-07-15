@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
     router,
     res: [],
     audio: '',
+    sentenceId: '',
     chinese: '',
     english: '',
     pinyin: '',
@@ -53,6 +54,7 @@ export const store = new Vuex.Store({
       }).then(function(response){
         console.log(response.data)
         state.audio = '';
+        state.sentenceId = '';
         state.chinese = '';
         state.english = '';
         state.pinyin = '';
@@ -63,8 +65,8 @@ export const store = new Vuex.Store({
         state.currSent = 0;
         state.wbwState = []
         state.sentencePoints = 0;
+        state.correctAnswers = [];
         // state.sentenceType = 0;
-        state.books = 0;
         commit('SET_SENTENCES', {sentData: response.data})
       })
     },
@@ -74,17 +76,12 @@ export const store = new Vuex.Store({
       // return 3;
     },
     SENTENCE_TRACKER({commit, state}){
-      // let sentt = Math.floor(Math.random() * 3);
-      //localStorage.setItem("sentenceType", sentt);
-      // state.sentenceType = sentt;
-
       console.log(`currSent is ${state.currSent} and length is ${state.res.length}`);
-
       let chosenSentence
       if(state.currSent < state.res.length) {
         chosenSentence = state.res[state.currSent];
-        // console.log(chosenSentence);
-        // console.log('current sentence index',state.currSent);
+        console.log(chosenSentence);
+        commit('SENTENCE_ID', {sentenceIdData:chosenSentence.id})
         commit('CHINESE', {chineseData:chosenSentence.chinese})
         commit('ENGLISH', {englishData:chosenSentence.english})
         commit('PINYIN', {pinyinData:chosenSentence.pinyin})
@@ -94,7 +91,6 @@ export const store = new Vuex.Store({
       } else {
         state.endRound = true;
         router.push({name:'summary'})
-        //state.sentenceType = Math.floor(Math.random() * 3)
       }
       let arr = []
       state.wbw.map(function(i){
@@ -110,6 +106,27 @@ export const store = new Vuex.Store({
       }
       commit('SHUFFLED', {shuffledData: shuffled})
     },
+    POST_RESULTS({commit, state}){
+      let data = {
+        u: $cookies.get('user'),
+        t: 'readComp',
+        co: `${state.sentencePoints}`,
+        un: `${0}`,
+        wr: `${state.res.length - state.sentencePoints}`,
+        duration: 0,
+        results: state.correctAnswers
+      }
+      axios({
+        method: 'post',
+        url: 'https://www.hanyu.co/ajax/exerciseResults.aspx',
+        data,
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
+        }
+      }).then(function(response){
+        console.log(response);
+      })
+    }
   },
   mutations: {
     SET_SENTENCES(state, {sentData}){
@@ -139,6 +156,9 @@ export const store = new Vuex.Store({
     },
     SHUFFLED(state, {shuffledData}){
       state.shuffled = shuffledData;
+    },
+    SENTENCE_ID(state, {sentenceIdData}){
+      state.sentenceId = sentenceIdData;
     }
   },
   options: {

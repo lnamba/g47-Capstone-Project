@@ -55,6 +55,9 @@ export default {
     sentence(){
       return this.$store.state.sentence;
     },
+    sentenceId(){
+      return this.$store.state.sentenceId;
+    },
     chinese(){
       return this.$store.state.chinese;
     },
@@ -101,14 +104,14 @@ export default {
 
       //check ifthis.$store.state.wbwState and wbw matches
       if (this.match(this.$store.state.wbw, this.$store.state.wbwState)){
-        // console.log('matches');
         if (this.matchFirstTry){
           this.$store.state.sentencePoints++;
-          // console.log('Points for the user', this.$store.state.sentencePoints);
+          this.$store.state.correctAnswers.push({Xref:`${this.$store.state.sentenceId}`, Score:'1'})
+        } else {
+          this.$store.state.correctAnswers.push({Xref:`${this.$store.state.sentenceId}`, Score:'3'})
         }
         this.roundClear = true;
       } else if(!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')) {
-        // console.log('no match');
         this.matchFirstTry = false;
       }
     },
@@ -134,11 +137,6 @@ export default {
       this.currentIndex = 0
       this.roundClear = false;
       this.clickedWord = '';
-      window.sentenceType = Math.floor(Math.random()*3)+1
-      console.log(window.sentenceType);
-      // this.$store.state.sentenceType = Math.floor(Math.random()*3)
-      // this.$store.dispatch('RANDOMIZE_SENTENCE')
-      // localStorage.setItem("sentenceType", Math.floor(Math.random() * 3));
       this.$store.dispatch('SENTENCE_TRACKER')
 
     }

@@ -8,10 +8,10 @@
     </div>
 
     <div v-if="hidebutton">
-      <chinese-comprehension v-if="arr === 1"></chinese-comprehension>
-      <english-comprehension v-else-if="arr === 2"></english-comprehension>
-      <listening-comprehension v-else-if="arr === 3"></listening-comprehension>
-      <span v-else>Component failed {{arr}}</span>
+      <chinese-comprehension v-if="sentenceType === 0"></chinese-comprehension>
+      <english-comprehension v-else-if="sentenceType === 1"></english-comprehension>
+      <listening-comprehension v-else></listening-comprehension>
+      <!-- <span v-else>Component failed {{sentenceType}}</span> -->
     </div>
   </div>
 </template>
@@ -20,25 +20,18 @@
 import store from '../Store';
 export default {
   data() {
-    window.sentenceType = 2;
     return {
-      // sentenceType: 0,
+      sentenceType: 0,
       name: `${this.$cookies.get('name')}`,
       avatar: `${this.$cookies.get('avatar')}`,
-      arr: window.sentenceType
     }
   },
   created(){
     this.$store.dispatch('GET_SENTENCES')
-    // localStorage.setItem("sentenceType", 0);
-    // this.arr = Math.floor(Math.random()*3
-    window.sentenceType = Math.floor(Math.random()*3)+1;
-    console.log('its being created',this.arr);
   },
   methods: {
     startGame(){
-      // this.$store.state.sentenceType = Math.floor(Math.random()*3)
-      // this.$store.state.books = Math.floor(Math.random()*3)
+      this.sentenceType = Math.floor(Math.random()*3);
       this.$store.state.endRound = false;
       this.$store.state.hidebutton = true;
     },
@@ -50,15 +43,6 @@ export default {
     hidebutton(){
       return this.$store.state.hidebutton;
     },
-    // sentenceType(){
-    //   return this.$store.state.sentenceType;
-    // },
-    // books(){
-    //   console.log("calling books in the browser");
-    //   let blah =  this.$store.state.sentenceType;
-    //   // return localStorage.getItem("sentenceType")
-    //   return this.$store.state.sentenceType;
-    // },
   }
 }
 </script>
