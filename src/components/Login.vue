@@ -1,30 +1,38 @@
 <template lang="html">
-    <div class="row" id="outer">
-      <div id="login">
-        <div id="inner">
+    <!-- <div class="row" id="outer"> -->
+      <div id="login" class="grid-x grid-padding-x">
+        <div class="medium-1 cell"></div>
+        <div id="inner" class="medium-5 cell">
           <form v-on:submit.prevent="submitForm">
             <h1>Login</h1>
             <div class="row">
-              <div class="medium-6 columns">
+              <div class="medium-12 cell">
                 <label>Email Address:
                   <input type="text" name="email" v-model="email">
                 </label>
               </div>
-              <div class="medium-6 columns">
+            </div>
+            <div class="row">
+              <div class="medium-12 cell">
                 <label>Password:
                   <input type="password" name="password" v-model="password">
                 </label>
               </div>
             </div>
             <div class="row">
-              <div class="medium-6 columns">
+              <div class="medium-12 cell">
                 <input class="button alert" type="submit" name="submit" value="Login">
+              </div>
+            </div>
+            <div class="row">
+              <div class="medium-12 cell">
+                <p>Not a member? Visit our site to <a href="https://www.hanyu.co/login.aspx?register=1">sign up</a>.</p>
               </div>
             </div>
           </form>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -71,26 +79,14 @@ export default {
 
 <style lang="css">
 
-#login {
-  padding-top: 150px;
-  font-family: "Raleway", "Helvetica Neue", sans-serif;
-}
-
 form > h1 {
   font-family: "Raleway", "Helvetica Neue", sans-serif;
   color: #FFF;
 }
 
-#inner {
-  width: 50%;
-  height: 55%;
-  margin: 0 auto;
-  padding: 20px;
-  float: left;
-  margin-left: 10%;
-}
-
-#outer {
+#login {
+  padding-top: 150px;
+  font-family: "Raleway", "Helvetica Neue", sans-serif;
   height: 100vh;
   background: url('../assets/img/lanterns.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -112,7 +108,4 @@ div.medium-6.columns:last-child {
   padding: 0 30px 30px 30px;
 }
 
-/*input.large {
-  color: #FCEBEA;
-}*/
 </style>

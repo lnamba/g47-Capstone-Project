@@ -12,7 +12,7 @@
         </div>
       </div>
       <div id="tiles">
-        <button class="tile" v-for="(word, index) in shuffled" @click="clickWord(word, index)" :title="word.english">
+        <button class="tile" v-for="(word, index) in shuffled" @click="clickWord(word, index)" :title="`${word.pinyin} - ${word.english}`">
           <div class="chinese">{{ word.chinese }}</div>
         </button>
       </div>

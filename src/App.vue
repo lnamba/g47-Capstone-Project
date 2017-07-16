@@ -1,11 +1,23 @@
 <template>
   <div id="app">
-    <div class="top-bar grid-x">
-      <li class="logo small-2 cell">
-        <img id="logo" src="./assets/img/logo4white.png" alt="logo">
-        <router-link to="/">HANYU.CO</router-link>
-      </li>
-      <li class="text-center logo small-1 cell" id="logout" v-if="this.$cookies.get('user')" @click="logout"><a>Logout</a></li>
+    <div class="title-bar" data-responsive-toggle="navbar" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle="navbar"></button>
+      <div class="title-bar-title">Menu</div>
+    </div>
+    <div class="top-bar" id="navbar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li class="brand">
+            <a href="http://www.hanyu.co/default.aspx"><img id="logo" src="./assets/img/logo4white.png" alt="logo">HANYU.CO</a>
+          </li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu" v-if="this.$cookies.get('user')">
+          <li><router-link class="link align-left" to="/">Home</router-link></li>
+          <li @click="logout"><a>Logout</a></li>
+        </ul>
+      </div>
     </div>
     <div class="content-wrapper">
       <router-view></router-view>
@@ -26,6 +38,7 @@ export default {
     }
   },
   mounted(){
+    $(document).foundation();
     if (this.$cookies.get('user')) {
       this.loggedIn = true;
     }
@@ -54,7 +67,7 @@ export default {
     outline: none;
   }
 
-  .logo, .logo a {
+  li > a, .brand {
     color: $white;
   }
 
@@ -65,22 +78,50 @@ export default {
     width: 40px;
   }
 
-  .top-bar, .logo, .bottom-bar {
+  .top-bar, .top-bar ul, .top-bar a, .title-bar {
     background-color: #333;
     list-style-type: none;
   }
 
-  .top-bar li:first-child {
+  .brand {
     font-size: 1.2em;
     line-height: 35px;
     font-weight: 100;
     font-family: 'Raleway', sans-serif;
   }
 
-  #logout a {
+  .brand a {
+    padding: 0;
+  }
+
+  .top-bar-right a {
     font-family: 'Helvetica Neue', Helvetica, 'Roboto', Arial, sans-serif;
     font-size: 1em;
   }
+
+  a:hover {
+    color: #DA5961;
+  }
+
+  // LOGIN PAGE
+
+  p {
+    font-size: 1.1em;
+    color: #FFF;
+  }
+
+  p > a {
+    color: #9AB4CB
+  }
+
+  p > a:hover {
+    color: #DA5961;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+
+  //Begin exercise styles
 
   #heading h1:first-child {
     margin-top: 30px;
