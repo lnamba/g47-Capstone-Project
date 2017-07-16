@@ -47,7 +47,7 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch('SENTENCE_TRACKER');
+    // this.$store.dispatch('SENTENCE_TRACKER');
 
   },
   computed: {
@@ -143,8 +143,6 @@ export default {
       this.currentIndex = index;
     },
     next(){
-      console.log("next was clicked");
-
       this.matchFirstTry = true;
       this.currentIndex = 0
       this.roundClear = false;

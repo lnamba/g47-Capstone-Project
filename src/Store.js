@@ -27,7 +27,6 @@ export const store = new Vuex.Store({
     endRound: false,
     hidebutton: false,
     sentenceIndex: 0,
-    getStuff: function(){ console.log("getting"); return localStorage.getItem("sentenceType")}
   },
   getters: {
 
@@ -66,7 +65,7 @@ export const store = new Vuex.Store({
         state.wbwState = []
         state.sentencePoints = 0;
         state.correctAnswers = [];
-        // state.sentenceType = 0;
+        state.sentenceType = 0;
         commit('SET_SENTENCES', {sentData: response.data})
       })
     },
@@ -77,6 +76,7 @@ export const store = new Vuex.Store({
     },
     SENTENCE_TRACKER({commit, state}){
       console.log(`currSent is ${state.currSent} and length is ${state.res.length}`);
+      state.sentenceType = Math.floor(Math.random() * 3)
       let chosenSentence
       if(state.currSent < state.res.length) {
         chosenSentence = state.res[state.currSent];

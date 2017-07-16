@@ -22,7 +22,7 @@ import store from '../Store';
 export default {
   data() {
     return {
-      sentenceType: 0,
+      // sentenceType: 0,
       name: `${this.$cookies.get('name')}`,
       avatar: `${this.$cookies.get('avatar')}`,
     }
@@ -32,9 +32,10 @@ export default {
   },
   methods: {
     startGame(){
-      this.sentenceType = Math.floor(Math.random()*3);
+      // this.sentenceType = Math.floor(Math.random()*3);
       this.$store.state.endRound = false;
       this.$store.state.hidebutton = true;
+      this.$store.dispatch('SENTENCE_TRACKER')
     },
   },
   computed: {
@@ -43,6 +44,9 @@ export default {
     },
     hidebutton(){
       return this.$store.state.hidebutton;
+    },
+    sentenceType(){
+      return this.$store.state.sentenceType;
     },
   }
 }

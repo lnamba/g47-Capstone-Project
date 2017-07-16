@@ -49,7 +49,7 @@ export default {
     }
   },
   mounted(){
-    this.$store.dispatch('SENTENCE_TRACKER')
+    // this.$store.dispatch('SENTENCE_TRACKER')
 
   },
   computed: {
@@ -115,8 +115,6 @@ export default {
         } else {
           this.$store.state.correctAnswers.push({Xref:`${this.$store.state.sentenceId}`, Score:'3'})
         }
-        console.log('wbw', this.$store.state.wbw);
-        console.log('whwState', this.$store.state.wbwState);
         this.roundClear = true;
       } else if(!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')) {
         this.matchFirstTry = false;
@@ -139,7 +137,6 @@ export default {
       this.currentIndex = index;
     },
     next(){
-      console.log("next was clicked");
       this.matchFirstTry = true;
       this.currentIndex = 0
       this.roundClear = false;
