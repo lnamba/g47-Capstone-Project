@@ -131,6 +131,7 @@ export default {
       this.currentIndex = 0
       this.roundClear = false;
       this.$store.dispatch('SENTENCE_TRACKER')
+      this.$store.state.currSent++;
     }
   },
 }

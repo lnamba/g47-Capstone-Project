@@ -10,8 +10,8 @@
     </div>
 
     <div v-if="hidebutton">
-      <chinese-comprehension v-if="sentenceType === 0"></chinese-comprehension>
-      <english-comprehension v-else-if="sentenceType === 1"></english-comprehension>
+      <chinese-comprehension v-if="getRandom === 0"></chinese-comprehension>
+      <english-comprehension v-else-if="getRandom === 1"></english-comprehension>
       <listening-comprehension v-else></listening-comprehension>
     </div>
   </div>
@@ -44,6 +44,9 @@ export default {
     hidebutton(){
       return this.$store.state.hidebutton;
     },
+    getRandom(){
+      return this.$store.state.sentenceType;
+    }
   }
 }
 </script>

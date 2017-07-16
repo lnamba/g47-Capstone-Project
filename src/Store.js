@@ -76,7 +76,9 @@ export const store = new Vuex.Store({
       // return 3;
     },
     SENTENCE_TRACKER({commit, state}){
-      console.log(`currSent is ${state.currSent} and length is ${state.res.length}`);
+      let randd = Math.floor(Math.random() * 3);
+      state.sentenceType  = randd;
+      console.log(`SENTENCE_TRACKER triggered! and rand is ${randd} `);
       let chosenSentence
       if(state.currSent < state.res.length) {
         chosenSentence = state.res[state.currSent];
@@ -87,7 +89,7 @@ export const store = new Vuex.Store({
         commit('PINYIN', {pinyinData:chosenSentence.pinyin})
         commit('AUDIO', {audioData:chosenSentence.audio})
         commit('WBW', {wbwData:chosenSentence.wbw})
-        state.currSent++;
+
       } else {
         state.endRound = true;
         router.push({name:'summary'})

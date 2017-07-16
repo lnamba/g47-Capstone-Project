@@ -148,7 +148,8 @@ export default {
       this.matchFirstTry = true;
       this.currentIndex = 0
       this.roundClear = false;
-      this.$store.dispatch('SENTENCE_TRACKER')
+      this.$store.dispatch('SENTENCE_TRACKER');
+      this.$store.state.currSent++;
     }
   },
 }

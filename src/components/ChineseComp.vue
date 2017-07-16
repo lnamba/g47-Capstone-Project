@@ -145,6 +145,7 @@ export default {
       this.roundClear = false;
       this.clickedWord = '';
       this.$store.dispatch('SENTENCE_TRACKER')
+      this.$store.state.currSent++;
 
     }
   },
