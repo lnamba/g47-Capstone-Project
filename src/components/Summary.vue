@@ -9,8 +9,16 @@
         </div>
         <div class="row">
           <div class="small-6">
-            <button class="button success large" @click="nextRound">Next Round</button>
-            <button class="button alert large" @click="end">End Game</button>
+            <div class="row">
+              <div class="medium-3 float-left">
+                <button class="button success large" @click="nextRound">Next Round</button>
+
+              </div>
+              <div class="medium-3 float-right">
+                <button class="button alert large" @click="end">End Game</button>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -98,6 +106,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  .grid-container {
+    height: 100vh
+  }
   h1 {
     margin-top: 30px;
     margin-left: 20px;

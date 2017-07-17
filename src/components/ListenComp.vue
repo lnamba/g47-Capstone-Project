@@ -153,9 +153,9 @@ export default {
 
 <style lang="css" scoped>
 
-  #listen-comp {
+  /*#listen-comp {
     height: 100vh;
-  }
+  }*/
 
   #audio {
     margin: 0 auto;

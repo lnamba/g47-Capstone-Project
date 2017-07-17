@@ -135,9 +135,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  #read-comp-2 {
+  /*#read-comp-2 {
     height: 100vh;
-  }
+  }*/
 
   .chinese {
     font-size: 2.5em;

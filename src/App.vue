@@ -24,12 +24,36 @@
       <router-view></router-view>
     </div>
 
-    <!-- <div class="columns small-6 right" id="bottom-bar">
-
+    <footer class="grid-x grid-padding-x">
+      <div class="medium-4 cell">
         <p>&copy; 2017 Spiffy Ventures</p>
-
-    </div> -->
-
+      </div>
+      <div class="small-2 medium-1 cell small-offset-1 medium-offset-0">
+        <a href="https://twitter.com/hanyudotco" target="_blank">
+          <img src="../static/icons/twitter.png" alt="twitter-icon">
+        </a>
+      </div>
+      <div class="small-2 medium-1 cell">
+        <a href="https://www.facebook.com/hanyuCO">
+          <img src="../static/icons/facebook.png" alt="facebook-icon">
+        </a>
+      </div>
+      <div class="small-2 medium-1 cell">
+        <a href="https://www.instagram.com/hanyu.co/">
+          <img src="../static/icons/instagram.png" alt="instagram-icon">
+        </a>
+      </div>
+      <div class="small-2 medium-1 cell">
+        <a href="https://www.youtube.com/channel/UC8cnMvHc_Lk5qLOFZ3z-hzA">
+          <img src="../static/icons/youtube.png" alt="youtube-icon">
+        </a>
+      </div>
+      <div class="small-2 medium-1 cell">
+        <a href="https://www.linkedin.com/company/hanyu-co">
+          <img src="../static/icons/linkedin.png" alt="linkedin-icon">
+        </a>
+      </div>
+    </footer>
 
   </div>
 </template>
@@ -45,6 +69,8 @@ export default {
   },
   mounted(){
     $(document).foundation();
+
+
     if (this.$cookies.get('user')) {
       this.loggedIn = true;
     } else {
@@ -90,19 +116,28 @@ export default {
     background-color: #333;
     list-style-type: none;
   }
-
-  #bottom-bar {
-    padding: 16px 0 0 20px;
-    color: #FFF;
-    display: table;
-    width: 100%;
-    height: 40px;
-    font-family: 'Helvetica Neue', Helvetica, 'Roboto', Arial, sans-serif;
+  html, body, template {
+    height: 100%;
   }
 
-  #bottom-bar > p {
-    display: table-cell;
-    vertical-align: middle;
+  #app {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  div.content-wrapper {
+    flex: 1;
+  }
+
+  footer {
+    background-color: #333;
+    height: 60px;
+    padding: 10px 0 0 20px;
+  }
+
+  footer > p {
+    margin: 0;
   }
 
   .brand {

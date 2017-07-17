@@ -159,9 +159,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  #read-comp-1 {
+  /*#read-comp-1 {
     height: 100vh;
-  }
+  }*/
 
   .space div:first-child {
     font-size: 1.5em;
