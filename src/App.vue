@@ -127,15 +127,11 @@ export default {
 
   //Begin exercise styles
 
-  #heading h1:first-child {
+  #heading h1 {
     margin-top: 30px;
-
-  }
-
-  #heading h1:last-child {
     text-align: center;
-    margin-top: 40px;
   }
+
 
   .chinese {
     font-family: 'Yuanti SC';

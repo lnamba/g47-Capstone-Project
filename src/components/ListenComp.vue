@@ -1,7 +1,6 @@
 <template lang="html">
   <div class="grid-container" id="listen-comp">
     <div class="row" id="heading">
-      <h1>Exercises</h1>
       <i class="fi-play" @click="replay"></i>
       <audio id="audio" :src="audio" autoplay></audio>
     </div>

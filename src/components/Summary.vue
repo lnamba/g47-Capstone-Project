@@ -39,7 +39,7 @@ export default {
       }];
     } else if (!correct) {
       data = [{
-        'name': '100% Incorrect',
+        'name': 'Try again!',
         'points': incorrect
       }]
     } else {
@@ -49,7 +49,12 @@ export default {
       }]
     }
     let width = 400, height = 400, radius = Math.min(width, height)/2;
-    let color = d3.scaleOrdinal().range(['#15B61F', '#DA1821']);
+    let color
+    if (!correct){
+      color = d3.scaleOrdinal().range(['#DA1821']);
+    } else {
+      color = d3.scaleOrdinal().range(['#15B61F', '#DA1821']);
+    }
     let pie = d3.pie().value(function(d){
       return d.points;
     })(data);
@@ -68,7 +73,7 @@ export default {
     .text(function(d) {
         return d.data.name;
     })
-    .style('fill', '#000').style('font-size', '1.1em').style('font-family', 'Tahoma, "Helvetica Neue", sans-serif')
+    .style('fill', '#000').style('font-size', '1.2em').style('font-family', 'Tahoma, "Helvetica Neue", sans-serif')
   },
   methods: {
     nextRound(){
@@ -84,6 +89,11 @@ export default {
 <style lang="css" scoped>
   h1 {
     margin-top: 30px;
+    margin-left: 20px;
+  }
+
+  h2 {
+    margin-top: 50px;
   }
 
   .arc, svg{

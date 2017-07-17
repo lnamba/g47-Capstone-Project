@@ -1,7 +1,6 @@
 <template lang="html">
   <div class="grid-container" id="read-comp-1">
     <div class="row" id="heading">
-      <h1>Exercises</h1>
       <audio id="audio" :src="audio" autoplay></audio>
       <h1 class="chinese">{{ chinese }}</h1>
     </div>

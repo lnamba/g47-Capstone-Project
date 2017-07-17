@@ -69,11 +69,6 @@ export const store = new Vuex.Store({
         commit('SET_SENTENCES', {sentData: response.data})
       })
     },
-    RANDOMIZE_SENTENCE({commit, state}){
-      // commit('SENTENCE_TYPE', {sentenceTypeData:Math.floor(Math.random() * 3)})
-      // state.sentenceType = Math.floor(Math.random() * 3)
-      // return 3;
-    },
     SENTENCE_TRACKER({commit, state}){
       console.log(`currSent is ${state.currSent} and length is ${state.res.length}`);
       state.sentenceType = Math.floor(Math.random() * 3)

@@ -1,7 +1,6 @@
 <template lang="html">
   <div class="grid-container" id="read-comp-2">
     <div class="row" id="heading">
-      <h1>Exercises</h1>
       <h1><b>{{ english }}</b></h1>
     </div>
     <div class="row">
