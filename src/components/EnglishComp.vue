@@ -113,7 +113,7 @@ export default {
         return false;
       }
       for(let i = arr1.length; i--;) {
-        if (arr1[i] !== arr2[i]){
+        if (arr1[i].id !== arr2[i].id){
           return false;
         }
       }

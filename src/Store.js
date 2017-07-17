@@ -66,13 +66,20 @@ export const store = new Vuex.Store({
         state.sentencePoints = 0;
         state.correctAnswers = [];
         state.sentenceType = 0;
+        response.data.map(function(i, ind){
+          if (i.wbw.length <= 1) {
+            console.log('found one word');
+            response.data.splice(ind, 1)
+          }
+        })
+        console.log(response.data);
         commit('SET_SENTENCES', {sentData: response.data})
       })
     },
     SENTENCE_TRACKER({commit, state}){
       console.log(`currSent is ${state.currSent} and length is ${state.res.length}`);
       state.sentenceType = Math.floor(Math.random() * 3)
-      let chosenSentence
+      let chosenSentence;
       if(state.currSent < state.res.length) {
         chosenSentence = state.res[state.currSent];
         console.log(chosenSentence);
@@ -127,10 +134,6 @@ export const store = new Vuex.Store({
     SET_SENTENCES(state, {sentData}){
       state.res = sentData;
     },
-    // SENTENCE_TYPE(state, {sentenceTypeData}){
-    //   state.sentenceType = sentenceTypeData;
-    //   console.log('This is the type of sentence', state.sentenceType);
-    // },
     CHINESE(state, {chineseData}){
       state.chinese = chineseData;
     },

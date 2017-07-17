@@ -7,13 +7,13 @@
     <div class="row">
       <div id="spaces" class="medium-8 columns">
           <div class="space" v-for="(word, index) in wbwState" @click="removeTile(word, index)">
-            <div v-show="wbwState[index]" :style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#000' }">{{ word.pinyin }}</div>
-            <div v-show="wbwState[index]" :style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#239D1F' }"><b>{{ word.english }}</b></div>
+            <div v-show="wbwState[index]" :style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#000' }"><b>{{ word.pinyin }}</b></div>
+            <div v-show="wbwState[index]" :style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#000' }">{{ word.english }}</div>
           </div>
       </div>
       <div id="tiles">
         <button class="tile" v-for="(word, index) in shuffled" @click="clickWord(word, index)" :title="word.english">
-          <div class="pinyin">{{ word.pinyin }}</div>
+          <div class="pinyin"><b>{{ word.pinyin }}</b></div>
           <div class="eng">{{ word.english }}</div>
         </button>
       </div>
@@ -124,7 +124,7 @@ export default {
         return false;
       }
       for(let i = arr1.length; i--;) {
-        if (arr1[i] !== arr2[i]){
+        if (arr1[i].id !== arr2[i].id){
           return false;
         }
       }
@@ -177,7 +177,7 @@ export default {
   }
 
   .eng {
-    color: #C10E40;
+    color: #333;
     font-size: 1em;
   }
 

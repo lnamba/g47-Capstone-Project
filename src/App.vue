@@ -177,8 +177,21 @@ export default {
     font-family: "Tahoma", "Raleway", "Helvetica Neue", sans-serif;
     border-radius: 15px;
     background-color: #DDD;
+    color: #000;
     cursor: pointer;
     width: 20%;
+  }
+
+  .tile:hover {
+    background-color: #55CC99;
+    -moz-box-shadow: inset 0 0 20px #2B664D;
+   -webkit-box-shadow: inset 0 0 20px #2B664D;
+   box-shadow: inset 0 0 20px #2B664D;
+   transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  }
+
+  .tile:hover > .eng {
+    color: #333;
   }
 
   .cheer, .encourage {
@@ -186,7 +199,7 @@ export default {
     margin: 50px auto;
   }
 
-  button.success {
+  button.success, button.alert {
     margin: 100px auto;
     display: block;
   }

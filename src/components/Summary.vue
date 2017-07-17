@@ -7,7 +7,6 @@
           <h2 class="text-center">You answered {{points}}/{{resLength}} questions correctly!</h2>
           <div id="pie" class="small-centered float-center"></div>
           <button class="button success large" @click="nextRound">Next Round</button>
-
         </div>
       </div>
     </div>
