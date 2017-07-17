@@ -19,12 +19,18 @@
         </ul>
       </div>
     </div>
+
     <div class="content-wrapper">
       <router-view></router-view>
     </div>
-    <!-- <div id="bottom-bar" class="top-bar">
-      <p>&copy; 2017 Spiffy Ventures</p>
+
+    <!-- <div class="columns small-6 right" id="bottom-bar">
+
+        <p>&copy; 2017 Spiffy Ventures</p>
+
     </div> -->
+
+
   </div>
 </template>
 
@@ -41,6 +47,8 @@ export default {
     $(document).foundation();
     if (this.$cookies.get('user')) {
       this.loggedIn = true;
+    } else {
+      this.logout()
     }
   },
   methods: {
@@ -78,9 +86,23 @@ export default {
     width: 40px;
   }
 
-  .top-bar, .top-bar ul, .top-bar a, .title-bar {
+  .top-bar, .top-bar ul, .top-bar a, .title-bar, #bottom-bar {
     background-color: #333;
     list-style-type: none;
+  }
+
+  #bottom-bar {
+    padding: 16px 0 0 20px;
+    color: #FFF;
+    display: table;
+    width: 100%;
+    height: 40px;
+    font-family: 'Helvetica Neue', Helvetica, 'Roboto', Arial, sans-serif;
+  }
+
+  #bottom-bar > p {
+    display: table-cell;
+    vertical-align: middle;
   }
 
   .brand {
@@ -131,7 +153,6 @@ export default {
     margin-top: 30px;
     text-align: center;
   }
-
 
   .chinese {
     font-family: 'Yuanti SC';
@@ -204,16 +225,6 @@ export default {
     display: block;
   }
 
-  #bottom-bar {
-    color: #FFF;
-    display: table;
-    width: 100%;
-  }
 
-  #bottom-bar > p {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 8px;
-  }
 
 </style>

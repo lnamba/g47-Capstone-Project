@@ -6,7 +6,12 @@
           <h1>Exercise Summary</h1>
           <h2 class="text-center">You answered {{points}}/{{resLength}} questions correctly!</h2>
           <div id="pie" class="small-centered float-center"></div>
-          <button class="button success large" @click="nextRound">Next Round</button>
+        </div>
+        <div class="row">
+          <div class="small-6">
+            <button class="button success large" @click="nextRound">Next Round</button>
+            <button class="button alert large" @click="end">End Game</button>
+          </div>
         </div>
       </div>
     </div>
@@ -80,6 +85,13 @@ export default {
       console.log('here is the results', this.$store.state.correctAnswers);
       this.$store.dispatch('POST_RESULTS')
       this.$router.push('sentences')
+    },
+    end(){
+      this.loggedIn = false;
+      this.$cookies.remove('user');
+      this.$cookies.remove('name');
+      this.$cookies.remove('avatar');
+      this.$router.push({path:'/'});
     }
   }
 }
@@ -98,6 +110,5 @@ export default {
   .arc, svg{
     border: 1px solid #000;
     stroke: #000;
-
   }
 </style>
