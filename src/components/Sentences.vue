@@ -1,18 +1,31 @@
 <template lang="html">
-  <div class="grid-container">
-    <div v-if="!hidebutton" class="grid-x grid-margin-x">
-      <div class="cell medium-12 large-offset-1">
-        <h1>Welcome, {{ name }}!</h1>
-        <img :src="avatar" alt="avatar" v-if="avatar !== 'null'">
-        <img src="../assets/img/blankUser.png" alt="avatar" v-else>
-        <button class="button success large" @click="startGame">Start!</button>
+  <div>
+    <div class="grid-x" v-if="!hidebutton">
+      <div class="cell medium-6">
+        <div class="row">
+          <div class="cell medium-10">
+            <h1 class="text-center">Welcome, {{ name }}!</h1>
+            <img class="float-center" :src="avatar" alt="avatar" v-if="avatar !== 'null'">
+            <img class="float-center" src="../assets/img/blankUser.png" alt="avatar" v-else>
+            <button class="button success large" @click="startGame">Start!</button>
+          </div>
+        </div>
+      </div>
+      <div class="cell medium-6" id="about">
+        <div class="row">
+          <div class="cell medium-10">
+            <h2 class="text-center">Instructions</h2>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div v-if="hidebutton">
-      <chinese-comprehension v-if="sentenceType === 0"></chinese-comprehension>
-      <english-comprehension v-else-if="sentenceType === 1"></english-comprehension>
-      <listening-comprehension v-else></listening-comprehension>
+    <div class="grid-x" v-if="hidebutton">
+      <div class="cell medium-12">
+        <chinese-comprehension v-if="sentenceType === 0"></chinese-comprehension>
+        <english-comprehension v-else-if="sentenceType === 1"></english-comprehension>
+        <listening-comprehension v-else></listening-comprehension>
+      </div>
     </div>
   </div>
 </template>
@@ -53,7 +66,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  h1 {
+  h1, h2 {
     margin-top: 30px;
   }
 
@@ -67,4 +80,6 @@ export default {
   button{
     cursor: pointer;
   }
+
+  
 </style>

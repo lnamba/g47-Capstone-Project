@@ -14,7 +14,7 @@
       </div>
       <div class="top-bar-right">
         <ul class="menu" v-if="this.$cookies.get('user')">
-          <li><router-link class="link align-left" to="/">Home</router-link></li>
+          <li><router-link class="link align-left" to="/sentences">Home</router-link></li>
           <li @click="logout"><a>Logout</a></li>
         </ul>
       </div>
@@ -101,6 +101,10 @@ export default {
 
   a:hover {
     color: #DA5961;
+  }
+
+  a:active, a:focus {
+    color: #FFF;
   }
 
   // LOGIN PAGE

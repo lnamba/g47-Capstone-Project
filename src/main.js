@@ -11,6 +11,7 @@ import ChineseComp from '@/components/ChineseComp';
 import EnglishComp from '@/components/EnglishComp';
 import ListenComp from '@/components/ListenComp';
 import { store } from './Store';
+import * as d3 from "d3";
 
 window.jQuery = jQuery;
 window.$ = jQuery;
@@ -21,6 +22,7 @@ require('foundation-sites');
 
 Vue.use(VueAxios, axios)
 Vue.use(require('vue-cookies'))
+Vue.use(d3)
 
 Vue.component('chinese-comprehension', ChineseComp);
 Vue.component('english-comprehension', EnglishComp);
