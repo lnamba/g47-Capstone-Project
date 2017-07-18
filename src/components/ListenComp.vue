@@ -1,10 +1,10 @@
 <template lang="html">
-  <div class="grid-container" id="listen-comp">
-    <div class="row" id="heading">
+  <div class="grid-x" id="listen-comp">
+    <div class="medium-12 cell" id="heading">
       <i class="fi-play" @click="replay"></i>
       <audio id="audio" :src="audio" autoplay></audio>
     </div>
-    <div class="row">
+    <div class="medium-12 cell">
       <div id="spaces" class="medium-8 columns">
         <div class="space" v-for="(word, index) in wbwState" @click="removeTile(word, index)">
           <div v-show="wbwState[index]" :class="{chinese}" :style="{ margin:`${8}px`, color: '#000' }">{{ word.chinese }}</div>
@@ -16,17 +16,17 @@
         </button>
       </div>
     </div>
-    <div class="row" v-show="roundClear">
+    <div class="medium-12 cell" v-show="roundClear">
       <div class="message">
         <h1 class="cheer">{{ chinese }}</h1>
         <h1 class="cheer">{{ english }}</h1>
       </div>
       <button class="button success large" @click="next">Next Sentence</button>
     </div>
-    <div class="row" v-show="!match(wbw, wbwState) && !wbwState.includes('')">
+    <div class="medium-12 cell" v-show="!match(wbw, wbwState) && !wbwState.includes('')">
       <div class="message">
         <h1 class="encourage">Keep Trying!</h1>
-        <button class="button alert large" @click="solve">Solve</button>
+        <button class="button alert large" @click="solve">Show Answer</button>
       </div>
     </div>
   </div>
@@ -35,7 +35,6 @@
 <script>
 import Router from 'vue-router';
 import Vue from 'vue';
-import GetSentences from '../mixins/GetSentences';
 
 export default {
   data(){
@@ -45,10 +44,6 @@ export default {
       clickedWord: '',
       matchFirstTry: true,
     }
-  },
-  created(){
-    // this.$store.dispatch('SENTENCE_TRACKER');
-
   },
   computed: {
     audio(){

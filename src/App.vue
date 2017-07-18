@@ -73,6 +73,7 @@ export default {
 
     if (this.$cookies.get('user')) {
       this.loggedIn = true;
+      this.$router.push({path:'/sentences'});
     } else {
       this.logout()
     }
@@ -106,6 +107,10 @@ export default {
   }
 
   // Custom Styles
+
+  h1 {
+    font-size: 3em;
+  }
 
   #logo {
     height: 40px;

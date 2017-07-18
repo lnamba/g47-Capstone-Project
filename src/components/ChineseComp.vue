@@ -1,11 +1,11 @@
 <template lang="html">
-  <div class="grid-container" id="read-comp-1">
-    <div class="row" id="heading">
+  <div class="grid-x" id="read-comp-1">
+    <div class="medium-12 cell" id="heading">
       <audio id="audio" :src="audio" autoplay></audio>
       <h1 class="chinese">{{ chinese }}</h1>
     </div>
-    <div class="row">
-      <div id="spaces" class="medium-8 columns">
+    <div class="medium-12 cell">
+      <div id="spaces">
           <div class="space" v-for="(word, index) in wbwState" @click="removeTile(word, index)">
             <div v-show="wbwState[index]" :style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#000' }"><b>{{ word.pinyin }}</b></div>
             <div v-show="wbwState[index]" :style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#000' }">{{ word.english }}</div>
@@ -18,16 +18,16 @@
         </button>
       </div>
     </div>
-    <div class="row" v-show="roundClear">
+    <div class="cell medium-12" v-show="roundClear">
       <div class="message">
         <h1 class="cheer">{{ english }}</h1>
       </div>
       <button class="button success large" @click="next">Next Sentence</button>
     </div>
-    <div class="row" v-show="!match(wbw, wbwState) && !wbwState.includes('')">
+    <div class="cell medium-12" v-show="!match(wbw, wbwState) && !wbwState.includes('')">
       <div class="message">
         <h1 class="encourage">Keep Trying!</h1>
-        <button class="button alert large" @click="solve">Solve</button>
+        <button class="button alert large" @click="solve">Show Answer</button>
       </div>
     </div>
   </div>
@@ -37,7 +37,6 @@
 import Router from 'vue-router';
 import Vue from 'vue';
 import VueTruncate from 'vue-truncate-filter';
-import GetSentences from '../mixins/GetSentences';
 
 export default {
   data(){
@@ -47,10 +46,6 @@ export default {
       clickedWord: '',
       matchFirstTry: true,
     }
-  },
-  mounted(){
-    // this.$store.dispatch('SENTENCE_TRACKER')
-
   },
   computed: {
     sentence(){
@@ -167,9 +162,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  /*#read-comp-1 {
-    height: 100vh;
-  }*/
+
 
   .space div:first-child {
     font-size: 1.5em;

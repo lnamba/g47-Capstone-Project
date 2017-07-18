@@ -1,27 +1,27 @@
 <template lang="html">
   <div>
-    <div class="row" v-if="!hidebutton">
-      <!-- <div class="cell medium-6">
-        <div class="row"> -->
-
-          <div class="cell medium-10">
-            <img :src="photo">
-            <h1 class="text-center">Welcome, {{ name }}!</h1>
-            <img class="float-center" :src="avatar" alt="avatar" v-if="avatar !== 'null'">
-            <img class="float-center" src="../assets/img/blankUser.png" alt="avatar" v-else>
-            <button class="button success large" @click="startGame">Start!</button>
-          </div>
-        <!-- </div>
-      </div> -->
-      <!-- <div class="cell medium-6" id="about"> -->
-        <!-- <img :src="photo"> -->
-        <!-- <div class="row">
-          <div class="cell medium-10">
-            <h2 class="text-center">Instructions</h2>
-          </div>
-        </div> -->
+    <div v-if="!hidebutton">
+      <div class="cell medium-12">
+        <img :src="photo">
       </div>
-    <!-- </div> -->
+      <div class="grid-x grid-padding-x">
+        <div class="cell medium-6" id="user">
+          <h1 class="text-center">Welcome, {{ name }}!</h1>
+          <img class="float-center" :src="avatar" alt="avatar" v-if="avatar !== 'null'">
+          <img class="float-center" src="../assets/img/blankUser.png" alt="avatar" v-else>
+          <button class="button success large" @click="startGame">Start!</button>
+        </div>
+        <div class="cell medium-6" id="instructions">
+          <h1 class="text-center">Instructions</h1>
+          <ul>
+            <li>There are three types of exercises: Chinese to English, English to Chinese, and Listening. They will be presented in random order.</li>
+            <li>Click the tiles to arrange them in the order that matches the sentence given.</li>
+            <li>If you are correct, you'll pass to the next round. If you are incorrect, you can continue rearranging tiles until you answer correctly or click the "Show Answer" button to be shown the answer.</li>
+            <li>View your results to see how many answers were correct.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <div class="grid-container" v-if="hidebutton">
       <div class="cell medium-12">
@@ -54,13 +54,14 @@ export default {
       '../../static/random/horizontal/stadium.jpg',
       '../../static/random/horizontal/station.jpg',
       '../../static/random/horizontal/wall.jpg',
+      '../../static/random/horizontal/peking.jpg',
+      '../../static/random/horizontal/tower.jpg',
     ]
     this.photo = photoArr[randPhoto]
     console.log(this.photo);
   },
   methods: {
     startGame(){
-      // this.sentenceType = Math.floor(Math.random()*3);
       this.$store.state.endRound = false;
       this.$store.state.hidebutton = true;
       this.$store.dispatch('SENTENCE_TRACKER')
@@ -81,6 +82,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  h1 {
+    font-size: 3em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
 
   h1, h2 {
     margin-top: 30px;
@@ -101,9 +109,15 @@ export default {
     cursor: pointer;
   }
 
-  #about {
+  #instructions {
+    background-color: #545454;
+    color: #FFF;
+    padding: 0 30px;
+  }
 
-    /*background: url('../assets/img/random/xian.jpg') no-repeat center center fixed;*/
+  #instructions li {
+    margin-bottom: 20px;
+    font-size: 1.2em;
   }
 
 </style>

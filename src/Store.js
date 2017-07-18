@@ -66,13 +66,12 @@ export const store = new Vuex.Store({
         state.sentencePoints = 0;
         state.correctAnswers = [];
         state.sentenceType = 0;
+        state.hidebutton = false;
         response.data.map(function(i, ind){
           if (i.wbw.length <= 1) {
-            console.log('found one word');
             response.data.splice(ind, 1)
           }
         })
-        console.log(response.data);
         commit('SET_SENTENCES', {sentData: response.data})
       })
     },
