@@ -155,20 +155,23 @@ export default {
 
 <style lang="css" scoped>
 
-  /*#listen-comp {
-    height: 100vh;
-  }*/
-
   #audio {
     margin: 0 auto;
     display: block;
   }
 
-  i.fi-play, i.fi-refresh {
+  i.fi-play {
     font-size: 5em;
     text-align: center;
     display: block;
     cursor: pointer;
+    color: #222;
+    text-shadow: 0 1px 0 #777, 0 2px 0 #555, 0 3px 0 #444,0 4px 0 #333, 0 5px 0 #000, 0px 6px 0px #222, 0px 0px 0px #111, 0px 8px 7px #000;
+  }
+
+  i.fi-play:active {
+    color: #222;
+    text-shadow: none;
   }
 
   .chinese {
