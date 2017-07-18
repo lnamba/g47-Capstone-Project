@@ -7,13 +7,13 @@
     <div class="medium-12 cell">
       <div id="spaces">
           <div class="space" v-for="(word, index) in wbwState" @click="removeTile(word, index)">
-            <div v-show="wbwState[index]" :style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#000' }"><b>{{ word.pinyin }}</b></div>
-            <div v-show="wbwState[index]" :style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#000' }">{{ word.english }}</div>
+            <div v-show="wbwState[index]" :style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#666', fontSize:`${1.2}em` }">{{ word.pinyin }}</div>
+            <div v-show="wbwState[index]" :style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#000', fontSize:`${1.2}em` }">{{ word.english }}</div>
           </div>
       </div>
       <div id="tiles">
         <button class="tile" v-for="(word, index) in shuffled" @click="clickWord(word, index)" :title="word.english">
-          <div class="pinyin"><b>{{ word.pinyin }}</b></div>
+          <div class="pinyin">{{ word.pinyin }}</div>
           <div class="eng">{{ word.english }}</div>
         </button>
       </div>
@@ -165,22 +165,19 @@ export default {
 <style lang="css" scoped>
 
 
-  .space div:first-child {
-    font-size: 1.5em;
-  }
 
-  .space div:last-child {
-    font-size: 1em;
+  .tile:hover div {
+    color: white
   }
 
   .pinyin {
-    color: #000;
-    font-size: 1.5em;
+    color: #666;
+    font-size: 1.2em;
   }
 
   .eng {
-    color: #333;
-    font-size: 1em;
+    color: #000;
+    font-size: 1.2em;
   }
 
 </style>

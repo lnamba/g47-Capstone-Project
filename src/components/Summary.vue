@@ -35,14 +35,13 @@ export default {
     }
   },
   mounted(){
+    console.log(this.resLength);
     if (!this.resLength) {
-      console.log('pushing now');
       this.$router.push('sentences')
     }
     let incorrect = this.resLength - this.points;
     let correct = this.points;
     let data;
-
     if (!incorrect) {
       let pie = document.getElementById('pie');
       let h1 = document.createElement('h1');

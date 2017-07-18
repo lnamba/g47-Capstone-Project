@@ -167,10 +167,15 @@ export default {
     color: #FFF;
   }
 
-  button.success, button.alert {
+  .button.success, .button.alert {
     margin: 100px auto;
     display: block;
     border-radius: 10px;
+    color: #FFF;
+  }
+
+  .button.success:hover, .button.success:focus {
+    color: #FFF;
   }
 
   // LOGIN PAGE
@@ -248,11 +253,19 @@ export default {
   }
 
   .tile:hover {
-    background-color: #55CC99;
-    -moz-box-shadow: inset 0 0 20px #2B664D;
-   -webkit-box-shadow: inset 0 0 20px #2B664D;
-   box-shadow: inset 0 0 20px #2B664D;
+    background-color: #777;
+    color: #FFF;
+    -moz-box-shadow: inset 0 0 20px #000;
+   -webkit-box-shadow: inset 0 0 20px #000;
+   box-shadow: inset 0 0 20px #000;
    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+
+  //   background-color: #55CC99;
+  //   -moz-box-shadow: inset 0 0 20px #2B664D;
+  //  -webkit-box-shadow: inset 0 0 20px #2B664D;
+  //  box-shadow: inset 0 0 20px #2B664D;
+  //  transition: background-color 0.25s ease-out, color 0.25s ease-out;
   }
 
   .tile:hover > .eng {
