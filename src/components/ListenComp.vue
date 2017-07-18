@@ -26,6 +26,7 @@
     <div class="row" v-show="!match(wbw, wbwState) && !wbwState.includes('')">
       <div class="message">
         <h1 class="encourage">Keep Trying!</h1>
+        <button class="button alert large" @click="solve">Solve</button>
       </div>
     </div>
   </div>
@@ -101,8 +102,6 @@ export default {
       this.currentIndex = this.$store.state.wbwState.indexOf(empty);
       this.clickedWord = word;
       this.$store.state.wbwState[this.currentIndex] = this.clickedWord;
-      if (this.$store.state.wbwState[this.currentIndex] === this.$store.state.wbw[this.currentIndex].chinese) {
-      }
       let self = this;
       this.$store.state.shuffled.map(function(i, index){
         if (i === word) {
@@ -140,6 +139,14 @@ export default {
       this.$store.state.shuffled.push(word);
       this.$store.state.wbwState.splice(index, 1, '');
       this.currentIndex = index;
+    },
+    solve(){
+      let self = this;
+      this.$store.state.wbwState = [];
+      this.$store.state.wbw.map(function(i, ind){
+        self.$store.state.wbwState[ind] = i
+      })
+      this.clickWord()
     },
     next(){
       this.matchFirstTry = true;

@@ -10,13 +10,11 @@
         <div class="row">
           <div class="small-6">
             <div class="row">
-              <div class="medium-3 float-left">
+              <div id="next" class="medium-3 float-left">
                 <button class="button success large" @click="nextRound">Next Round</button>
-
               </div>
-              <div class="medium-3 float-right">
+              <div id="quit" class="medium-3 float-right">
                 <button class="button alert large" @click="end">End Game</button>
-
               </div>
             </div>
           </div>
@@ -37,9 +35,16 @@ export default {
     }
   },
   mounted(){
+    if (!this.points) {
+      this.$router.push('sentences')
+    }
     let incorrect = this.resLength - this.points;
     let correct = this.points;
     let data;
+    // if (!incorrect) {
+    //
+    // }
+
     if (correct && incorrect){
       data = [{
         'name': `${(correct/this.resLength).toFixed(2) * 100}% Correct`,
@@ -122,4 +127,13 @@ export default {
     border: 1px solid #000;
     stroke: #000;
   }
+
+  #next {
+    margin-left: 50px;
+  }
+
+  #quit {
+    margin-right: 50px;
+  }
+
 </style>

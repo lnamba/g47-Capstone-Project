@@ -34,22 +34,22 @@
         </a>
       </div>
       <div class="small-2 medium-1 cell">
-        <a href="https://www.facebook.com/hanyuCO">
+        <a href="https://www.facebook.com/hanyuCO" target="_blank">
           <img src="../static/icons/facebook.png" alt="facebook-icon">
         </a>
       </div>
       <div class="small-2 medium-1 cell">
-        <a href="https://www.instagram.com/hanyu.co/">
+        <a href="https://www.instagram.com/hanyu.co/" target="_blank">
           <img src="../static/icons/instagram.png" alt="instagram-icon">
         </a>
       </div>
       <div class="small-2 medium-1 cell">
-        <a href="https://www.youtube.com/channel/UC8cnMvHc_Lk5qLOFZ3z-hzA">
+        <a href="https://www.youtube.com/channel/UC8cnMvHc_Lk5qLOFZ3z-hzA" target="_blank">
           <img src="../static/icons/youtube.png" alt="youtube-icon">
         </a>
       </div>
       <div class="small-2 medium-1 cell">
-        <a href="https://www.linkedin.com/company/hanyu-co">
+        <a href="https://www.linkedin.com/company/hanyu-co" target="_blank">
           <img src="../static/icons/linkedin.png" alt="linkedin-icon">
         </a>
       </div>
