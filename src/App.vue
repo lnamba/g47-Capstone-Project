@@ -14,7 +14,8 @@
       </div>
       <div class="top-bar-right">
         <ul class="menu" v-if="this.$cookies.get('user')">
-          <li><router-link class="link align-left" to="/sentences">Home</router-link></li>
+          <li><a @click="toDash">Home</a></li>
+          <!-- <li><router-link class="link align-left" to="/sentences">Home</router-link></li> -->
           <li @click="logout"><a>Logout</a></li>
         </ul>
       </div>
@@ -77,6 +78,11 @@ export default {
     }
   },
   methods: {
+    toDash(){
+      this.$store.state.hidebutton = false;
+      this.$router.push('sentences')
+      this.$store.dispatch('GET_SENTENCES')
+    },
     logout(){
       this.loggedIn = false;
       this.$cookies.remove('user');
@@ -218,7 +224,7 @@ export default {
     display: inline-block;
     width: 20%;
     height: 5%;
-    border: 2px solid #000;
+    border: 2px solid #555;
     margin: 40px 20px;
     font-family: "Tahoma", "Raleway", "Helvetica Neue", sans-serif;
     color: #55CC99;

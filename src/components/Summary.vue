@@ -118,7 +118,7 @@ export default {
       .text(function(d) {
           return d.data.name;
       })
-      .style('fill', '#000').style('font-size', '1.2em').style('font-family', 'Tahoma, "Helvetica Neue", sans-serif')
+      .style('fill', '#000').style('font-size', '1em').style('font-family', 'Tahoma, "Helvetica Neue", sans-serif')
 
     }
 
