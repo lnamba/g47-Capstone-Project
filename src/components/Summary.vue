@@ -11,7 +11,8 @@
           <div class="small-6">
             <div class="row">
               <div id="next" class="medium-3 float-left">
-                <button class="button success large" @click="nextRound">Next Round</button>
+                <button v-if="!points" class="button warning large" @click="nextRound">Try Again!</button>
+                <button v-else class="button success large" @click="nextRound">Next Round</button>
               </div>
               <div id="quit" class="medium-3 float-right">
                 <button class="button alert large" @click="end">End Game</button>
@@ -61,7 +62,7 @@ export default {
       let pie = document.getElementById('pie');
       let h1 = document.createElement('h1');
       let i = document.createElement('i');
-      h1.innerHTML = 'Try again!';
+      h1.innerHTML = 'Retry';
       h1.className = 'text-center';
       h1.style.fontSize = '5em';
       h1.style.marginTop = '80px';

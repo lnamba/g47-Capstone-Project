@@ -180,7 +180,15 @@ export default {
     color: #FFF;
   }
 
-  .button.success:hover, .button.success:focus {
+  .button.warning {
+    margin: 100px auto;
+    display: block;
+    border-radius: 10px;
+    color: #000;
+  }
+
+  .button.success:hover, .button.success:focus,
+  .button.alert:hover, .button.alert:focus {
     color: #FFF;
   }
 
