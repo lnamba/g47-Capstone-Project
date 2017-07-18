@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="grid-x" id="read-comp-2">
     <div class="medium-12 cell" id="heading">
+      <audio id="audio" :src="audio"></audio>
       <h1><b>{{ english }}</b></h1>
     </div>
     <div class="medium-12 cell">
@@ -47,6 +48,9 @@ export default {
   computed: {
     sentence(){
       return this.$store.state.sentence;
+    },
+    audio(){
+      return this.$store.state.audio;
     },
     chinese(){
       return this.$store.state.chinese;
@@ -101,6 +105,7 @@ export default {
           this.$store.state.correctAnswers.push({Xref:`${this.$store.state.sentenceId}`, Score:'3'})
         }
         this.roundClear = true;
+        audio.play();
       } else if(!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')) {
         this.matchFirstTry = false;
       }

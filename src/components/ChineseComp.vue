@@ -111,6 +111,7 @@ export default {
           this.$store.state.correctAnswers.push({Xref:`${this.$store.state.sentenceId}`, Score:'3'})
         }
         this.roundClear = true;
+        audio.play();
       } else if(!this.match(this.$store.state.wbw, this.$store.state.wbwState) && !this.$store.state.wbwState.includes('')) {
         this.matchFirstTry = false;
       }

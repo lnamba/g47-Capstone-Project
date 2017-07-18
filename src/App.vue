@@ -69,8 +69,6 @@ export default {
   },
   mounted(){
     $(document).foundation();
-
-
     if (this.$cookies.get('user')) {
       this.loggedIn = true;
       this.$router.push({path:'/sentences'});
@@ -169,6 +167,12 @@ export default {
     color: #FFF;
   }
 
+  button.success, button.alert {
+    margin: 100px auto;
+    display: block;
+    border-radius: 10px;
+  }
+
   // LOGIN PAGE
 
   p {
@@ -259,12 +263,5 @@ export default {
     text-align: center;
     margin: 50px auto;
   }
-
-  button.success, button.alert {
-    margin: 100px auto;
-    display: block;
-  }
-
-
 
 </style>
