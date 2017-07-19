@@ -74,33 +74,17 @@ export default {
       pie.appendChild(h1)
       pie.appendChild(i)
     } else {
-      // if (correct && incorrect){
-        data = [{
-          'name': `${(correct/this.resLength).toFixed(2) * 100}% Correct`,
-          'points': correct
-        },
-        {
-          'name': `${(incorrect/this.resLength).toFixed(2) * 100}% Incorrect`,
-          'points': incorrect
-        }];
-      // } else if (!correct) {
-      //   data = [{
-      //     'name': 'Try again!',
-      //     'points': incorrect
-      //   }]
-      // } else {
-      //   data = [{
-      //     'name': '100% Correct',
-      //     'points': correct
-      //   }]
-      // }
+      data = [{
+        'name': `${(correct/this.resLength).toFixed(2) * 100}% Correct`,
+        'points': correct
+      },
+      {
+        'name': `${(incorrect/this.resLength).toFixed(2) * 100}% Incorrect`,
+        'points': incorrect
+      }];
       let width = 400, height = 400, radius = Math.min(width, height)/2;
-      let color
-      // if (!correct){
-      //   color = d3.scaleOrdinal().range(['#DA1821']);
-      // } else {
-        color = d3.scaleOrdinal().range(['#15B61F', '#DA1821']);
-      // }
+      let color;
+      color = d3.scaleOrdinal().range(['#15B61F', '#DA1821']);
       let pie = d3.pie().value(function(d){
         return d.points;
       })(data);

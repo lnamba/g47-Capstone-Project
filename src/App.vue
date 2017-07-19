@@ -173,7 +173,7 @@ export default {
     color: #FFF;
   }
 
-  .button.success, .button.alert {
+  .button.success:not(#login-button), .button.alert {
     margin: 100px auto;
     display: block;
     border-radius: 10px;

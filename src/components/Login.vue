@@ -1,38 +1,36 @@
 <template lang="html">
-    <!-- <div class="row" id="outer"> -->
-      <div id="login" class="grid-x grid-padding-x">
-        <div class="medium-1 cell"></div>
-        <div id="inner" class="medium-5 cell">
-          <form v-on:submit.prevent="submitForm">
-            <h1>Login</h1>
-            <div class="row">
-              <div class="medium-12 cell">
-                <label>Email Address:
-                  <input type="text" name="email" v-model="email">
-                </label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="medium-12 cell">
-                <label>Password:
-                  <input type="password" name="password" v-model="password">
-                </label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="medium-12 cell">
-                <input class="button alert" type="submit" name="submit" value="Login">
-              </div>
-            </div>
-            <div class="row">
-              <div class="medium-12 cell">
-                <p>Not a member? Visit our site to <a href="https://www.hanyu.co/login.aspx?register=1">sign up</a>.</p>
-              </div>
-            </div>
-          </form>
+  <div id="login" class="grid-x grid-padding-x">
+    <div class="medium-1 cell"></div>
+    <div id="inner" class="medium-5 cell">
+      <form v-on:submit.prevent="submitForm">
+        <h1>Login</h1>
+        <div class="row">
+          <div class="medium-12 cell">
+            <label>Email Address:
+              <input type="text" name="email" v-model="email">
+            </label>
+          </div>
         </div>
-      </div>
-    <!-- </div> -->
+        <div class="row">
+          <div class="medium-12 cell">
+            <label>Password:
+              <input type="password" name="password" v-model="password">
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="medium-12 cell">
+            <input id="login-button" class="button alert" type="submit" name="submit" value="Login">
+          </div>
+        </div>
+        <div class="row">
+          <div class="medium-12 cell">
+            <p>Not a member? Visit our site to <a href="https://www.hanyu.co/login.aspx?register=1">sign up</a>.</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -93,6 +91,10 @@ form > h1 {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+#login-button {
+  margin: 30px 0;
 }
 
 label {
