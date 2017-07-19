@@ -235,7 +235,6 @@ export default {
     border: 2px solid #555;
     margin: 40px 20px;
     font-family: "Tahoma", "Raleway", "Helvetica Neue", sans-serif;
-    color: #55CC99;
     cursor: pointer;
     border-radius: 15px;
     background-color: #DDD;
@@ -266,25 +265,18 @@ export default {
     width: 20%;
   }
 
-  .tile:hover {
+  .tile:hover, .space:hover {
     background-color: #777;
     color: #FFF;
     -moz-box-shadow: inset 0 0 20px #000;
-   -webkit-box-shadow: inset 0 0 20px #000;
-   box-shadow: inset 0 0 20px #000;
-   transition: background-color 0.25s ease-out, color 0.25s ease-out;
-
-
-  //   background-color: #55CC99;
-  //   -moz-box-shadow: inset 0 0 20px #2B664D;
-  //  -webkit-box-shadow: inset 0 0 20px #2B664D;
-  //  box-shadow: inset 0 0 20px #2B664D;
-  //  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    -webkit-box-shadow: inset 0 0 20px #000;
+    box-shadow: inset 0 0 20px #000;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
   }
 
-  .tile:hover > .eng {
-    color: #333;
-  }
+  // .space:hover div {
+  //   color: #FFF;
+  // }
 
   .cheer, .encourage {
     text-align: center;

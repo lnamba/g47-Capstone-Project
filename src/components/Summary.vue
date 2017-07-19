@@ -146,13 +146,14 @@ export default {
   .grid-container {
     height: 100vh
   }
+
   h1 {
     margin-top: 30px;
     margin-left: 20px;
   }
 
   h2 {
-    margin-top: 50px;
+    margin: 50px 0 60px 0;
   }
 
   .arc, svg{

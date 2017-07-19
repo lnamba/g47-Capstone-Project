@@ -7,14 +7,22 @@
     <div class="medium-12 cell">
       <div id="spaces">
           <div class="space" v-for="(word, index) in wbwState" @click="removeTile(word, index)">
-            <div v-show="wbwState[index]" :style="{ margin:`${8}px ${8}px 0 ${8}px`, color: '#666', fontSize:`${1.2}em` }">{{ word.pinyin }}</div>
-            <div v-show="wbwState[index]" :style="{ margin:`0 ${8}px ${8}px ${8}px`, color: '#000', fontSize:`${1.2}em` }">{{ word.english }}</div>
+            <div v-show="wbwState[index]" class="pinyin" :style="{ margin:`${8}px ${8}px 0 ${8}px` }">{{ word.pinyin }}</div>
+            <div v-show="wbwState[index]" class="eng" :style="{ margin:`0 ${8}px ${8}px ${8}px` }">{{ word.english }}</div>
           </div>
       </div>
       <div id="tiles">
         <button class="tile" v-for="(word, index) in shuffled" @click="clickWord(word, index)" :title="word.english">
           <div class="pinyin">{{ word.pinyin }}</div>
-          <div class="eng">{{ word.english }}</div>
+          <div class="eng">
+            <div v-if="word.english.length > 30">
+              <div class="jumper">{{ word.english}}</div>
+            </div>
+            <div v-else>
+              <div>{{ word.english}}</div>
+            </div>
+
+          </div>
         </button>
       </div>
     </div>
@@ -45,6 +53,7 @@ export default {
       roundClear: false,
       clickedWord: '',
       matchFirstTry: true,
+      showAll: false,
     }
   },
   computed: {
@@ -146,15 +155,16 @@ export default {
       this.roundClear = false;
       this.clickedWord = '';
       this.$store.dispatch('SENTENCE_TRACKER')
-    }
+    },
   },
   filters: {
     truncate: function(value) {
-      let length = 50;
+      let length = 30;
       if (value.length <= length) {
         return value;
       } else {
-        return value.substring(0, length) + '...';
+        return value;
+        //return value.substring(0, length) + '...';
       }
     }
   },
@@ -163,10 +173,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
-
-
-  .tile:hover div {
+  .tile:hover div, .space:hover .pinyin, .space:hover .eng {
     color: white
   }
 
@@ -179,5 +186,16 @@ export default {
     color: #000;
     font-size: 1.2em;
   }
+
+  .jumper{
+    height: 80px;
+    overflow: hidden;
+  }
+
+  .jumper:hover{
+    height: auto;
+  }
+
+
 
 </style>
