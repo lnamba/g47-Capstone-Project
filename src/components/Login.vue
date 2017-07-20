@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="login" class="grid-x grid-padding-x">
-    <div class="medium-1 cell"></div>
+    <div class="medium-2 cell"></div>
     <div id="inner" class="medium-5 cell">
       <form v-on:submit.prevent="submitForm">
         <h1>Login</h1>
@@ -83,7 +83,7 @@ form > h1 {
 }
 
 #login {
-  padding-top: 150px;
+  padding-top: 250px;
   font-family: "Raleway", "Helvetica Neue", sans-serif;
   height: 100vh;
   background: url('../assets/img/lanterns.jpg') no-repeat center center fixed;

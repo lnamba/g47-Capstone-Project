@@ -2,7 +2,7 @@
   <div>
     <div v-if="!hidebutton">
       <div class="cell medium-12">
-        <img :src="photo">
+        <img id="background" :src="photo">
       </div>
       <div class="grid-x grid-padding-x">
         <div class="cell medium-6" id="user">
@@ -93,6 +93,10 @@ export default {
 
   h1, h2 {
     margin-top: 30px;
+  }
+
+  #background {
+    width: 100%;
   }
 
   #exercise-heading {
