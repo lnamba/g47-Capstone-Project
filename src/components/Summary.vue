@@ -1,26 +1,18 @@
 <template lang="html">
-  <div class="grid-container">
-    <div class="row">
-      <div class="cell medium-10">
-        <div class="row">
-          <h1>Exercise Summary</h1>
-          <h2 class="text-center"><b>You answered {{points}}/{{resLength}} questions correctly!</b></h2>
-          <div id="pie"></div>
-        </div>
-        <div class="row">
-          <div class="small-6">
-            <div class="row">
-              <div id="next" class="medium-3 float-left">
-                <button v-if="!points" class="button warning large" @click="nextRound">Try Again!</button>
-                <button v-else class="button success large" @click="nextRound">Next Round</button>
-              </div>
-              <div id="quit" class="medium-3 float-right">
-                <button class="button alert large" @click="end">End Game</button>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="grid-x grid-padding-x">
+    <div class="cell medium-6" id="summary">
+      <h1>Exercise Summary</h1>
+      <h2 class="text-center"><b>You answered {{points}}/{{resLength}} questions correctly!</b></h2>
+      <div id="next">
+        <button v-if="!points" class="button warning large" @click="nextRound">Try Again!</button>
+        <button v-else class="button success large float-left" @click="nextRound">Next Round</button>
       </div>
+      <div id="quit">
+        <button class="button alert large float-right" @click="end">End Game</button>
+      </div>
+    </div>
+    <div class="cell medium-6" id="chart">
+      <div id="pie"></div>
     </div>
   </div>
 </template>
@@ -66,8 +58,8 @@ export default {
       drawDonutChart(
         '#pie',
         percentage,
-        290,
-        290,
+        350,
+        350,
         '.35em'
       );
 
@@ -100,14 +92,13 @@ export default {
         .style("fill", function(d, i) { return colors[i] })
         .attr("class", function(d, i) { return "color" + i })
         .attr("d", arc)
-        .each(function(d,i) { this._current = d; }); // store the initial values
-        console.log(path);
-
+        .each(function(d,i) { this._current = d; });
 
         var text = svg.append("text")
         .attr("text-anchor", "middle")
         .attr("dy", text_y)
-        .style("font-size", "5em");
+        .style("font-size", "5em")
+        .style("color", "#FFF");
 
         if (typeof(percent) === "string") {
           text.text(percent);
@@ -155,42 +146,35 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  .grid-container {
+  /*.grid-x {
     height: 100vh
+  }*/
+
+  #summary {
+    background-color: #545454;
+    color: #FFF;
   }
 
   h1 {
-    margin-top: 30px;
+    margin-top: 80px;
     margin-left: 20px;
   }
 
   h2 {
-    margin: 120px 0 60px 0;
+    margin: 170px 0 60px 0;
   }
-
-  /*.arc, svg{
-    border: 1px solid #000;
-    stroke: #000;
-  }*/
 
   #pie {
     text-align: center;
-  }
-
-  path.color0 {
-  fill: #1072b8;
-  }
-
-  path.color1 {
-    fill: #35526b;
+    margin: 30% 0;
   }
 
   #next {
-    margin-left: 50px;
+    margin-left: 60px;
   }
 
   #quit {
-    margin-right: 50px;
+    margin-right: 60px;
   }
 
 </style>

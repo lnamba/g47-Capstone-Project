@@ -174,7 +174,7 @@ export default {
   }
 
   .button.success:not(#login-button), .button.alert {
-    margin: 100px auto;
+    margin: 150px auto 100px auto;
     display: block;
     border-radius: 10px;
     color: #FFF;
@@ -213,7 +213,7 @@ export default {
   //Begin exercise styles
 
   #heading h1 {
-    margin-top: 30px;
+    margin-top: 80px;
     text-align: center;
   }
 
