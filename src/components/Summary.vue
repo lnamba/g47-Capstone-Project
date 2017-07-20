@@ -35,7 +35,7 @@ export default {
     let incorrect = this.resLength - this.points;
     let correct = this.points;
     let data;
-      let duration = 500, transition = 200;
+      let duration = 800, transition = 200;
       let percentage = (correct/this.resLength).toFixed(2) * 100;
       // let colors = ['#18B349', '#D41F25']
       let colors = ['#4FC08D', '#DA5961']
@@ -43,14 +43,14 @@ export default {
       drawDonutChart(
         '#pie',
         percentage,
-        350,
-        350,
+        370,
+        370,
         '.35em'
       );
 
       function drawDonutChart(element, percent, width, height, text_y) {
-        width = typeof width !== 'undefined' ? width : 290;
-        height = typeof height !== 'undefined' ? height : 290;
+        width = typeof width !== 'undefined' ? width : 350;
+        height = typeof height !== 'undefined' ? height : 350;
         text_y = typeof text_y !== 'undefined' ? text_y : "-.10em";
 
         let dataset = {
@@ -148,11 +148,12 @@ export default {
     margin: 170px 0 60px 0;
     font-family: 'Helvetica Neue', Helvetica, 'Roboto', Arial, sans-serif;
     font-weight: 300;
+    font-size: 2.5em;
   }
 
   #pie {
     text-align: center;
-    margin: 30% 0;
+    margin: 25% 0;
   }
 
   #next {
