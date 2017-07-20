@@ -181,7 +181,7 @@ export default {
   }
 
   .button.warning {
-    margin: 100px auto;
+    margin: 150px auto 100px auto;
     display: block;
     border-radius: 10px;
     color: #000;

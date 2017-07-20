@@ -2,9 +2,9 @@
   <div class="grid-x grid-padding-x">
     <div class="cell medium-6" id="summary">
       <h1>Exercise Summary</h1>
-      <h2 class="text-center"><b>You answered {{points}}/{{resLength}} questions correctly!</b></h2>
+      <h2 class="text-center">You answered {{points}}/{{resLength}} questions correctly!</h2>
       <div id="next">
-        <button v-if="!points" class="button warning large" @click="nextRound">Try Again!</button>
+        <button v-if="!points" class="button warning large float-left" @click="nextRound">Try Again!</button>
         <button v-else class="button success large float-left" @click="nextRound">Next Round</button>
       </div>
       <div id="quit">
@@ -35,25 +35,10 @@ export default {
     let incorrect = this.resLength - this.points;
     let correct = this.points;
     let data;
-    if (incorrect === this.resLength) {
-      let pie = document.getElementById('pie');
-      let h1 = document.createElement('h1');
-      let i = document.createElement('i');
-      h1.innerHTML = 'Retry';
-      h1.className = 'text-center';
-      h1.style.fontSize = '5em';
-      h1.style.marginTop = '80px';
-      h1.style.fontFamily = `'Raleway', sans-serif`;
-      i.className = 'fi-refresh text-center';
-      i.style.fontSize = '5em';
-      i.style.width = '100%';
-      i.style.display = 'inline-block'
-      pie.appendChild(h1)
-      pie.appendChild(i)
-    } else {
       let duration = 500, transition = 200;
       let percentage = (correct/this.resLength).toFixed(2) * 100;
-      let colors = ['#18B349', '#D41F25']
+      // let colors = ['#18B349', '#D41F25']
+      let colors = ['#4FC08D', '#DA5961']
 
       drawDonutChart(
         '#pie',
@@ -98,7 +83,8 @@ export default {
         .attr("text-anchor", "middle")
         .attr("dy", text_y)
         .style("font-size", "5em")
-        .style("color", "#FFF");
+        .style("color", "#FFF")
+        .style("font-family", "Raleway")
 
         if (typeof(percent) === "string") {
           text.text(percent);
@@ -119,7 +105,6 @@ export default {
             });
           }, 200);
         }
-      };
 
       function calcPercent(percent) {
         return [percent, 100-percent];
@@ -146,9 +131,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  /*.grid-x {
-    height: 100vh
-  }*/
 
   #summary {
     background-color: #545454;
@@ -158,10 +140,14 @@ export default {
   h1 {
     margin-top: 80px;
     margin-left: 20px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
   }
 
   h2 {
     margin: 170px 0 60px 0;
+    font-family: 'Helvetica Neue', Helvetica, 'Roboto', Arial, sans-serif;
+    font-weight: 300;
   }
 
   #pie {

@@ -122,7 +122,11 @@ export default {
 
   #instructions li {
     margin-bottom: 20px;
-    font-size: 1.5em;
+    font-size: 1.7em;
+  }
+
+  #instructions li:last-child {
+    padding-bottom: 20px; 
   }
 
 </style>
