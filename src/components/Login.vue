@@ -63,7 +63,6 @@ export default {
         }
       }).then(function(response) {
         self.userInfo = response.data;
-        // need auth here
         console.log(response.data);
         self.$cookies.set('user', self.userInfo.uniqueID, 'session')
         self.$cookies.set('name', self.userInfo.firstName, 'session')
@@ -83,7 +82,7 @@ form > h1 {
 }
 
 #login {
-  padding-top: 250px;
+  padding-top: 170px;
   font-family: "Raleway", "Helvetica Neue", sans-serif;
   height: 100vh;
   background: url('../assets/img/lanterns.jpg') no-repeat center center fixed;
