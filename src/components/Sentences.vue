@@ -2,7 +2,7 @@
   <div>
     <div v-if="!hidebutton">
       <div class="cell medium-12">
-        <img :src="photo">
+        <img id="background" :src="photo">
       </div>
       <div class="grid-x grid-padding-x">
         <div class="cell medium-6" id="user">
@@ -48,14 +48,15 @@ export default {
   },
   created(){
     this.$store.dispatch('GET_SENTENCES')
-    let randPhoto = Math.floor(Math.random() * 6)
-    let photoArr = ['../../static/random/horizontal/field.jpg',
-      '../../static/random/horizontal/skyline.jpg',
-      '../../static/random/horizontal/stadium.jpg',
-      '../../static/random/horizontal/station.jpg',
-      '../../static/random/horizontal/wall.jpg',
-      '../../static/random/horizontal/peking.jpg',
-      '../../static/random/horizontal/tower.jpg',
+    let randPhoto = Math.floor(Math.random() * 8)
+    let photoArr = ['../../static/random/Horizontal/field.jpg',
+      '../../static/random/Horizontal/skyline.jpg',
+      '../../static/random/Horizontal/stadium.jpg',
+      '../../static/random/Horizontal/station.jpg',
+      '../../static/random/Horizontal/wall.jpg',
+      '../../static/random/Horizontal/peking.jpg',
+      '../../static/random/Horizontal/tower.jpg',
+      '../../static/random/Horizontal/game.jpg',
     ]
     this.photo = photoArr[randPhoto]
     console.log(this.photo);
@@ -94,6 +95,10 @@ export default {
     margin-top: 30px;
   }
 
+  #background {
+    width: 100%;
+  }
+
   #exercise-heading {
     margin-left: 30px;
   }
@@ -117,7 +122,11 @@ export default {
 
   #instructions li {
     margin-bottom: 20px;
-    font-size: 1.2em;
+    font-size: 1.7em;
+  }
+
+  #instructions li:last-child {
+    padding-bottom: 20px; 
   }
 
 </style>

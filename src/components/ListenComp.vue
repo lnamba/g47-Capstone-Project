@@ -7,7 +7,7 @@
     <div class="medium-12 cell">
       <div id="spaces" class="medium-8 columns">
         <div class="space" v-for="(word, index) in wbwState" @click="removeTile(word, index)">
-          <div v-show="wbwState[index]" :class="{chinese}" :style="{ margin:`${8}px`, color: '#000' }">{{ word.chinese }}</div>
+          <div v-show="wbwState[index]" :class="{chinese}" :style="{ margin:`${8}px` }">{{ word.chinese }}</div>
         </div>
       </div>
       <div id="tiles">
@@ -154,6 +154,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+  .space:hover > div {
+    color: #FFF;
+  }
 
   #audio {
     margin: 0 auto;
