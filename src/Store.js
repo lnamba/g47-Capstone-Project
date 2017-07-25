@@ -45,7 +45,7 @@ export const store = new Vuex.Store({
       }
       axios({
         method: 'post',
-        url: 'http://www.hanyu.co/ajax/getExercise.aspx',
+        url: 'https://cors-anywhere.herokuapp.com/http://www.hanyu.co/ajax/getExercise.aspx',
         data,
         headers: {
           'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
@@ -119,7 +119,7 @@ export const store = new Vuex.Store({
       }
       axios({
         method: 'post',
-        url: 'https://www.hanyu.co/ajax/exerciseResults.aspx',
+        url: 'https://cors-anywhere.herokuapp.com/https://www.hanyu.co/ajax/exerciseResults.aspx',
         data,
         headers: {
           'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'

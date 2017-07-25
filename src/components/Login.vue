@@ -53,7 +53,7 @@ export default {
       let self = this;
       axios({
         method: 'post',
-        url: 'https://www.hanyu.co/ajax/login.aspx',
+        url: 'https://cors-anywhere.herokuapp.com/https://www.hanyu.co/ajax/login.aspx',
         data:{
           email: this.email,
           password: this.password
