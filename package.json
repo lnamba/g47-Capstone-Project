@@ -2,7 +2,7 @@
   "name": "vue-fondation-w2",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "Tommaso Marcelli <tommaso.marcelli@gmail.com>",
+  "author": "Lauren Namba <lnnamba@gmail.com>",
   "private": true,
   "scripts": {
     "start": "npm run dev",
